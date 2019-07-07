@@ -10,8 +10,8 @@
       <b-collapse id="nav-collapse" is-nav>
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto" right>
-          <b-nav-item href="/create/user">Registro</b-nav-item>
-          <b-nav-item href="#">Disabled</b-nav-item>
+          <b-nav-item href="/create/user">Nuevo Usuario</b-nav-item>
+          <b-nav-item href="/listar/user">Lista De Usuarios</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <v-btn

@@ -5,6 +5,7 @@
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
+              name="identificacion"
               v-model="identificacion"
               :counter="10"
               :rules="idRules"
@@ -15,6 +16,7 @@
             ></v-text-field>
 
             <v-text-field
+              name="nombre"
               v-model="nombre"
               :rules="nameRules"
               label="Nombre"
@@ -24,6 +26,7 @@
             ></v-text-field>
 
             <v-text-field
+              name="apellido"
               v-model="apellido"
               :rules="lastnameRules"
               label="Apellido"
@@ -33,6 +36,7 @@
             ></v-text-field>
 
             <v-text-field
+              name="email"
               v-model="email"
               :rules="emailRules"
               label="E-mail"
@@ -42,6 +46,7 @@
             ></v-text-field>
 
             <v-text-field
+              name="phone"
               v-model="phone"
               :rules="phoneRules"
               label="Telefono"
@@ -50,27 +55,28 @@
             ></v-text-field>
 
             <v-text-field
+              name="password"
               v-model="password"
               :counter="8"
               :rules="passwordRules"
               :type="'password'"
-              name="input-10-1"
               label="Contraseña"
               required
               outline
               clearable
             ></v-text-field>
 
-            <v-select
-              v-model="select"
-              :items="items"
-              :rules="[v => !!v || 'Item es requerido']"
-              label="Item"
-              required
-              outline
-            ></v-select>
+          <!-- <v-select
+            nome="tipo_usuario"
+            v-model="select"
+            :items="items"
+            :rules="[v => !!v || 'Item es requerido']"
+            label="Item"
+            required
+            outline
+          ></v-select> -->
 
-            <v-btn color="success" @click="validate">
+            <v-btn color="success" @click="agregarusuario">
               Validate
             </v-btn>
 
@@ -128,7 +134,7 @@ export default {
         "La contraseña no puede superar los 8 caracteres"
     ],
     select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"]
+    items: ["1", "2"]
   }),
 
   methods: {
@@ -139,6 +145,27 @@ export default {
     },
     reset() {
       this.$refs.form.reset();
+    },
+    agregarusuario(){
+      console.log("entro");
+      let config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        }
+      };
+      let params = new FormData();
+      params.append("identificacion", this.identificacion);
+      params.append("nombre", this.nombre);
+      params.append("apellido", this.apellido);
+      params.append("email", this.email);
+      params.append("telefono", this.phone);
+      params.append("password", this.password);
+      axios
+        .post(
+          "http://localhost/api/api.php?action=create",params, config)
+        .then(res => {
+
+        });
     }
   }
 };
