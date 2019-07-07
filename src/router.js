@@ -4,6 +4,10 @@ import Index from './views/index.vue'
 import CreateUser from './views/addUser.vue'
 import Listusers from './views/listusers.vue'
 import Edituser from './views/edituser.vue'
+import Aggcomuna from './views/agregarcomuna.vue'
+import Listcomuna from './views/listcomuna.vue'
+import Editcomuna from './views/editcomuna.vue'
+import Listbarrio from './views/listbarrios.vue'
 
 Vue.use(Router)
 
@@ -30,6 +34,26 @@ export default new Router({
       path: '/editar/user',
       name: 'editusers',
       component: Edituser
+    },
+    {
+      path: '/agergar/comuna',
+      name: 'aggcomuna',
+      component: Aggcomuna
+    },
+    {
+      path: '/listar/comuna',
+      name: 'listcomuna',
+      component: Listcomuna
+    },
+    {
+      path: '/editar/comuna',
+      name: 'editcomuna',
+      component: Editcomuna
+    },
+    {
+      path: '/listar/barrio',
+      name: 'listbarrio',
+      component: Listbarrio
     }
   ]
 })

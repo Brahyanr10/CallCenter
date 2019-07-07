@@ -4,6 +4,8 @@
         <v-card>
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation >
+              <h4>Editar Usuario</h4>
+              <br>
               <v-text-field
                 name='identificacion'
                 v-model="identificacion"

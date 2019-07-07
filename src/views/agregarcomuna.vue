@@ -51,7 +51,7 @@ methods:{
       axios
         .post("http://localhost/api/api.php?action=agregarcomuna", params, config)
         .then(res => {
-          this.$router.push({ name: "" });
+          this.$router.push({ name: "aggcomuna" });
 
         });
     }

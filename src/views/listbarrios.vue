@@ -19,12 +19,9 @@
             </v-data-table>
           </V-card-text>
         </v-card>
-
       </V-flex>
-
     </v-app>
   </div>
-
 </template>
 
 <script>
@@ -34,30 +31,18 @@ export default {
       comuna:[],
       headers: [
         {
-          text: 'Id Comuna',
+          text: 'Id Barrio',
           align: 'left',
           sortable: false,
           value: 'name'
         },
-        { text: 'Numero Comuna', value: '' },
-        {text: 'accion', value: '' }
+        { text: 'Nombre Barrio', value: '' },
+        { text: 'Nombre Comuna', value: '' },
+        {text: 'Accion', value: '' }
       ]
     }
   },
-  created(){
-    this.listarcomuna();
-  },
-  methods:{
-    listarcomuna(){
-      axios
-        .post("http://localhost/api/api.php?action=listarcomuna")
-        .then(res => {
-          this.comuna = res.data.comuna;
 
-        });
-    }
-
-  }
 }
 </script>
 
