@@ -20,7 +20,7 @@
             <v-select
               nome="nom_comuna"
               v-model="nom_comuna"
-              :items="comunaitems"
+              :items="comunas.num_comunax"
               :rules="[v => !!v || 'Item es requerido']"
               label="Item"
               required
