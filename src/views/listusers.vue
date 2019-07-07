@@ -1,24 +1,32 @@
 <template >
   <div id="app">
     <v-app id="inspire">
-      <v-data-table
-        :headers="headers"
-        :items="users"
-        class="elevation-1"
-      >
-        <template v-slot:items="props">
-          <td>{{ props.item.idUsuarios }}</td>
-          <td class="text-xs-right">{{ props.item.nombre }}</td>
-          <td class="text-xs-right">{{ props.item.apellido }}</td>
-          <td class="text-xs-right">{{ props.item.Correo }}</td>
-          <td class="text-xs-right">{{ props.item.telefono }}</td>
-          <td class="text-xs-right">{{ props.item.password }}</td>
-          <td class="text-xs-right">{{ props.item.id_tipo_usuario }}</td>
-          <router-link  :to="{ name: 'editusers', params: {id: props.item.idUsuarios} }">
-            <div  class="headline">editar</div>
-          </router-link>
-        </template>
-      </v-data-table>
+      <v-flex xs12 sm8 offset-sm2>
+        <v-card>
+          <v-card-text>
+            <v-data-table
+              :headers="headers"
+              :items="users"
+              class="elevation-1"
+            >
+              <template v-slot:items="props">
+                <td>{{ props.item.idUsuarios }}</td>
+                <td class="text-xs-right">{{ props.item.nombre }}</td>
+                <td class="text-xs-right">{{ props.item.apellido }}</td>
+                <td class="text-xs-right">{{ props.item.Correo }}</td>
+                <td class="text-xs-right">{{ props.item.telefono }}</td>
+                <td class="text-xs-right">{{ props.item.password }}</td>
+                <td class="text-xs-right">{{ props.item.id_tipo_usuario }}</td>
+                <router-link  :to="{ name: 'editusers', params: {id: props.item.idUsuarios} }">
+                  <div  class="headline">editar</div>
+                </router-link>
+              </template>
+            </v-data-table>
+          </V-card-text>
+        </v-card>
+
+      </V-flex>
+
     </v-app>
   </div>
 </template>
@@ -63,4 +71,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.v-card__text {
+    margin-top: 50px;
+}
 </style>

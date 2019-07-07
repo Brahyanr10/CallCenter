@@ -110,12 +110,12 @@ export default {
         (name && name.length <= 10) ||
         "El nombre no puede superar los 10 caracteres"
     ],
-    lastnameRules: [
-      lastname => !!lastname || "Apellido es requerido",
-      lastname =>
-        (lastname && lastname.length <= 10) ||
-        "El apellido no puede superar los 10 caracteres"
-    ],
+    // lastnameRules: [
+    //   lastname => !!lastname || "Apellido es requerido",
+    //   lastname =>
+    //     (lastname && lastname.length <= 10) ||
+    //     "El apellido no puede superar los 10 caracteres"
+    // ],
     email: "",
     emailRules: [
       email => !!email || "E-mail es requerido",
