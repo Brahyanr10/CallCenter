@@ -18,7 +18,7 @@
                 <td class="text-xs-right">{{ props.item.password }}</td>
                 <td class="text-xs-right">{{ props.item.id_tipo_usuario }}</td>
                 <router-link  :to="{ name: 'editusers', params: {id: props.item.idUsuarios} }">
-                  <div  class="headline">editar</div>
+                  editar
                 </router-link>
               </template>
             </v-data-table>

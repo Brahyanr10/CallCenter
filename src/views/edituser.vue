@@ -95,55 +95,46 @@ export default {
       telefono:"",
       password:"",
 
+      idRules: [
+         id => !!id || "Identificacion es requerido",
+         id =>
+           (id && id.length <= 10) ||
+           "La identificación no puede superar los 10 caracteres"
+       ],
+       nameRules: [
+         name => !!name || "Nombre es requerido",
+         name =>
+           (name && name.length <= 10) ||
+           "El nombre no puede superar los 10 caracteres"
+       ],
+       lastnameRules: [
+         lastname => !!lastname || "Apellido es requerido",
+         lastname =>
+           (lastname && lastname.length <= 10) ||
+           "El apellido no puede superar los 10 caracteres"
+       ],
+
+       emailRules: [
+         email => !!email || "E-mail es requerido",
+         email => /.+@.+/.test(email) || "E-mail debe ser valido"
+       ],
+       // phoneRules: [
+       //   phone => !!phone || "Telefono es requerido",
+       //   phone =>
+       //     (phone && phone.length <= 10) ||
+       //     "El telefono no puede superar los 10 caracteres"
+       // ],
+       passwordRules: [
+         password => !!password || "Contraseña es requerido",
+         password =>
+           (password && password.length <= 8) ||
+           "La contraseña no puede superar los 8 caracteres"
+       ],
+       select: null,
+       items: ["1", "2"]
 
     };
   },
-
-  data: () => ({
-    identificacion: "",
-    nombre: "",
-    apellido: "",
-    password: "",
-
-    idRules: [
-      id => !!id || "Identificacion es requerido",
-      id =>
-        (id && id.length <= 10) ||
-        "La identificación no puede superar los 10 caracteres"
-    ],
-    nameRules: [
-      name => !!name || "Nombre es requerido",
-      name =>
-        (name && name.length <= 10) ||
-        "El nombre no puede superar los 10 caracteres"
-    ],
-    lastnameRules: [
-      lastname => !!lastname || "Apellido es requerido",
-      lastname =>
-        (lastname && lastname.length <= 10) ||
-        "El apellido no puede superar los 10 caracteres"
-    ],
-    email: "",
-    emailRules: [
-      email => !!email || "E-mail es requerido",
-      email => /.+@.+/.test(email) || "E-mail debe ser valido"
-    ],
-    // phoneRules: [
-    //   phone => !!phone || "Telefono es requerido",
-    //   phone =>
-    //     (phone && phone.length <= 10) ||
-    //     "El telefono no puede superar los 10 caracteres"
-    // ],
-    passwordRules: [
-      password => !!password || "Contraseña es requerido",
-      password =>
-        (password && password.length <= 8) ||
-        "La contraseña no puede superar los 8 caracteres"
-    ],
-    select: null,
-    items: ["1", "2"]
-  }),
-
   created(){
     this.traerusuarios();
   },
