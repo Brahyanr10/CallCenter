@@ -4,6 +4,8 @@
       <v-flex xs12 sm8 offset-sm2>
         <v-card>
           <v-card-text>
+            <h4>Listado De  Comunas</h4>
+            <br>
             <v-data-table
               :headers="headers"
               :items="comuna"
@@ -11,7 +13,7 @@
             >
               <template v-slot:items="props">
                 <td>{{ props.item.idcomuna }}</td>
-                <td class="text-xs-right">{{ props.item.nom_comuna }}</td>
+                <td class="text-xs-left">{{ props.item.nom_comuna }}</td>
                 <router-link  :to="{ name: 'editcomuna', params: {id: props.item.idcomuna} }">
                   editar
                 </router-link>
@@ -42,7 +44,7 @@ export default {
         { text: 'Numero Comuna', value: '' },
         {text: 'accion', value: '' }
       ]
-    }
+    };
   },
   created(){
     this.listarcomuna();
@@ -62,4 +64,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.v-card__text {
+    margin-top: 50px;
+}
 </style>

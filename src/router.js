@@ -8,6 +8,7 @@ import Aggcomuna from './views/agregarcomuna.vue'
 import Listcomuna from './views/listcomuna.vue'
 import Editcomuna from './views/editcomuna.vue'
 import Listbarrio from './views/listbarrios.vue'
+import Editbarrio from './views/editbarrio.vue'
 
 Vue.use(Router)
 
@@ -54,6 +55,11 @@ export default new Router({
       path: '/listar/barrio',
       name: 'listbarrio',
       component: Listbarrio
+    },
+    {
+      path: '/editar/barrio',
+      name: 'editbarrio',
+      component: Editbarrio
     }
   ]
 })
