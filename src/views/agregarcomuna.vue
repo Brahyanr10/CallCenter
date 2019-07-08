@@ -18,14 +18,15 @@
               outline
               clearable
             ></v-text-field>
+            
 
             <v-btn color="success" @click="agregarcomuna">
               Validate
             </v-btn>
 
-            <v-btn color="error" @click="reset">
+            <!-- <v-btn color="error" @click="reset">
               Reset Form
-            </v-btn>
+            </v-btn> -->
           </v-form>
         </v-card-text>
       </v-card>
@@ -36,9 +37,27 @@
 
 <script>
 export default {
+    data: () => ({
+      comunas:[],
+      verificacion:0,
+      idRules: [
+        id => !!id || "Numero de Comuna es requerido",
+        id =>
+          (id && id.length <= 10) ||
+          "no puede superar los 10 caracteres"
+      ],
+    }),
 
 
 methods:{
+  validate() {
+    if (this.$refs.form.validate()) {
+
+    }
+  },
+  reset() {
+    this.$refs.form.reset();
+  },
     agregarcomuna(){
       let config = {
         headers: {
@@ -49,11 +68,34 @@ methods:{
       let params = new FormData();
       params.append("comuna", this.comuna);
       axios
-        .post("http://localhost/api/api.php?action=agregarcomuna", params, config)
+        .post("http://localhost/api/api.php?action=buscarcomuna", params, config)
         .then(res => {
-          this.$router.push({ name: "aggcomuna" });
+          this.comunas=res.data.comuna;
+          if (this.comunas.length == 0) {
+          axios
+            .post("http://localhost/api/api.php?action=agregarcomuna", params, config)
+            .then(res => {
+              this.reset();
+              Swal.fire({
+                position: 'top',
+                type: 'success',
+                title: 'Comuna registrada con exito',
+                showConfirmButton: false,
+                timer: 1500
+              })
 
+            });
+          }else {
+            Swal.fire({
+              type: 'error',
+              title: 'Error...',
+              text: 'La comuna ya esta registrada',
+
+              })
+          }
         });
+
+
     }
 }
 

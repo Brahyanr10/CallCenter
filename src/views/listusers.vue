@@ -4,7 +4,7 @@
       <v-flex xs12 sm8 offset-sm2>
         <v-card>
           <v-card-text>
-            <h4>Listado De  Barrios</h4>
+            <h4>Listado De  Usuarios</h4>
             <br>
             <v-data-table
               :headers="headers"
@@ -21,6 +21,9 @@
                 <td class="text-xs-left">{{ props.item.id_tipo_usuario }}</td>
                 <router-link  :to="{ name: 'editusers', params: {id: props.item.idUsuarios} }">
                   editar
+                </router-link>|
+                <router-link  :to="{ name: 'eliminarusuario', params: {id: props.item.idUsuarios} }">
+                  eliminar
                 </router-link>
               </template>
             </v-data-table>

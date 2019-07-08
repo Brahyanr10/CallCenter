@@ -4,24 +4,21 @@
       <v-flex xs12 sm8 offset-sm2>
         <v-card>
           <v-card-text>
-            <h4>Listado De  Barrios</h4>
+            <h4>Listado Puestos De Votacion</h4>
             <br>
             <v-data-table
               :headers="headers"
-              :items="barrio"
+              :items="puesto"
               class="elevation-1"
             >
               <template v-slot:items="props">
-                <td>{{ props.item.idbarrio }}</td>
+                <td>{{ props.item.idpuesto_votacion }}</td>
+                <td class="text-xs-left">{{ props.item.nombre }}</td>
+                <td class="text-xs-left">{{ props.item.direccion }}</td>
                 <td class="text-xs-left">{{ props.item.nom_barrio }}</td>
-                <td class="text-xs-left">{{ props.item.nom_comuna }}</td>
                 <router-link  class="text-xs-center" :to="{ name: 'editbarrio',
                                                             params: {id: props.item.idbarrio} }">
                   editar
-                </router-link>|
-                <router-link  class="text-xs-center" :to="{ name: 'deletebarrio',
-                                                            params: {id: props.item.idbarrio} }">
-                  Eliminar
                 </router-link>
               </template>
             </v-data-table>
@@ -30,43 +27,44 @@
       </V-flex>
     </v-app>
   </div>
+
 </template>
 
 <script>
 export default {
   data () {
     return {
-      barrio:[],
+      puesto:[],
       headers: [
         {
-          text: 'Id Barrio',
+          text: 'Id Puesto De Votacion',
           align: 'left',
           sortable: false,
           value: ''
         },
-        { text: 'Nombre Barrio', value: '' },
-        { text: 'Numero Comuna', value: '' },
+        { text: 'Nombre Votacion', value: '' },
+        { text: 'Direccion', value: '' },
+        { text: 'Barrio', value: '' },
         {text: 'Accion', value: '' }
       ]
     };
   },
   created(){
-    this.listarbarrio();
+    this.listarpuestos();
   },
   methods:{
-    listarbarrio(){
+    listarpuestos(){
       axios
-        .post("http://localhost/api/api.php?action=listarbarrio")
+        .post("http://localhost/api/api.php?action=listarpuestos")
         .then(res => {
-          this.barrio = res.data.barrio;
-          console.log(this.barrio);
+          this.puesto = res.data.puesto;
+          console.log(this.puesto);
 
         });
     }
   }
 }
 </script>
-
 
 <style lang="css" scoped>
 .v-card__text {

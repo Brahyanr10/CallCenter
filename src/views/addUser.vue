@@ -76,7 +76,7 @@
             outline
           ></v-select> -->
 
-            <v-btn color="success" @click="agregarusuario">
+            <v-btn color="success" @click="validate">
               Validate
             </v-btn>
 
@@ -93,10 +93,12 @@
 <script>
 export default {
   data: () => ({
+    usuario:[],
     identificacion: "",
     nombre: "",
     apellido: "",
     password: "",
+    verificacion:0,
 
     idRules: [
       id => !!id || "Identificacion es requerido",
@@ -140,32 +142,57 @@ export default {
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
-        this.snackbar = true;
+        // this.snackbar = true;
+        // this.agregarusuario();
       }
     },
     reset() {
       this.$refs.form.reset();
     },
     agregarusuario(){
-      console.log("entro");
-      let config = {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        }
-      };
-      let params = new FormData();
-      params.append("identificacion", this.identificacion);
-      params.append("nombre", this.nombre);
-      params.append("apellido", this.apellido);
-      params.append("email", this.email);
-      params.append("telefono", this.phone);
-      params.append("password", this.password);
-      axios
-        .post(
-          "http://localhost/api/api.php?action=create",params, config)
-        .then(res => {
 
-        });
+        console.log("entro");
+        let config = {
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        };
+        let params = new FormData();
+        params.append("identificacion", this.identificacion);
+        params.append("nombre", this.nombre);
+        params.append("apellido", this.apellido);
+        params.append("email", this.email);
+        params.append("telefono", this.phone);
+        params.append("password", this.password);
+        axios
+          .post(
+            "http://localhost/api/api.php?action=buscaridenti",params, config)
+          .then(res => {
+            this.usuarios=res.data.usuarios;
+            if (this.usuarios.length == 0) {
+            axios
+              .post(
+                "http://localhost/api/api.php?action=create",params, config)
+              .then(res => {
+                this.reset();
+                Swal.fire({
+                  position: 'top',
+                  type: 'success',
+                  title: 'Usuario registrado con exito',
+                  showConfirmButton: false,
+                  timer: 1500
+                })
+
+              });
+          }else {
+            Swal.fire({
+              type: 'error',
+              title: 'Error...',
+              text: 'La identificacion ya esta registrada',
+              })
+          }
+          });
+
     }
   }
 };

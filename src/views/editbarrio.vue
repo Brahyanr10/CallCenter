@@ -7,27 +7,29 @@
             <h4>Editar barrio</h4>
             <br>
             <v-text-field
-              name='num_barrio'
-              v-model="num_barrio"
-              :counter="10"
+              name='nom_barrio'
+              v-model="nom_barrio"
+              :counter="20"
               :rules="idRules"
-              label="Identificación"
+              label="Nombre Barrio"
               required
               outline
               clearable
             ></v-text-field>
 
             <v-select
-              nome="nom_comuna"
-              v-model="nom_comuna"
-              :items="comunas.num_comunax"
-              :rules="[v => !!v || 'Item es requerido']"
-              label="Item"
-              required
-              outline
+              :items="comunas"
+              item-text="nom_comuna"
+              v-model="selected"
+              item-value="idcomuna"
+              label="Seleccione una comuna"
+              bottom
+              autocomplete
             ></v-select>
 
-            <v-btn color="success" @click="">
+            <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+
+            <v-btn color="success" @click="updatebarrio">
               Validate
             </v-btn>
 
@@ -46,12 +48,10 @@
 export default {
   data() {
     return {
-      num_barrio:"",
-      nom_comuna:null,
+      selected: { idcomuna: "" },
+      nom_barrio:"",
       idbarrio: this.$route.params.id,
-      barrio:[],
       comunas:[],
-      comunaitems:[]
     };
   },
   created(){
@@ -68,18 +68,20 @@ export default {
       let params = new FormData();
       params.append("idbarrio", this.idbarrio);
       axios
+        .post("http://localhost/api/api.php?action=listarcomuna")
+        .then(res => {
+          this.comunas = res.data.comuna;
+          console.log(this.comunas);
+        });
+
+      axios
         .post("http://localhost/api/api.php?action=editbarrio", params, config)
         .then(res => {
           this.barrio=res.data.barrio;
-          this.num_barrio=this.barrio[0].nom_barrio;
+          this.nom_barrio=this.barrio[0].nom_barrio;
+          this.selected=this.barrio[0].idcomuna
         });
-        axios
-          .post("http://localhost/api/api.php?action=listarcomuna", params, config)
-          .then(res => {
-            this.comunas=res.data.comuna;
-            this.comunaitems=this.comunas;
-            console.log(this.comunas);
-          });
+
     },
     updatebarrio(){
       let config = {
@@ -89,15 +91,25 @@ export default {
         }
       };
       let params = new FormData();
-      params.append("idbarrio", this.idcomuna);
-      params.append("num_comuna", this.num_comuna);
+      params.append("idbarrio", this.idbarrio);
+      params.append("nombre", this.nom_barrio);
+      params.append("idcomuna", this.selected);
+
       axios
-        .post("http://localhost/api/api.php?action=updatecomuna", params, config)
+        .post("http://localhost/api/api.php?action=updatebarrio", params, config)
         .then(res => {
-          this.$router.push({ name: "listcomuna" });
+
 
         });
 
+    },
+    traercomunas() {
+      axios
+        .post("http://localhost/api/api.php?action=listarcomuna")
+        .then(res => {
+          this.comunas = res.data.comuna;
+          console.log(this.comunas);
+        });
     }
   }
 }

@@ -20,7 +20,12 @@
 
           <b-nav-item-dropdown text="Barrio" right>
             <b-dropdown-item :to="{name: 'listbarrio'}">Listado De Barrios</b-dropdown-item>
-            <b-dropdown-item :to="{name: ''}">Agregar Barrio</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'aggbarrio'}">Agregar Barrio</b-dropdown-item>
+          </b-nav-item-dropdown>
+
+          <b-nav-item-dropdown text="Puestos De Votacion" right>
+            <b-dropdown-item :to="{name: 'listvotacion'}">Listado Puestos De Votacion</b-dropdown-item>
+            <b-dropdown-item :to="{name: ''}">Agregar Puestos De Votacion</b-dropdown-item>
           </b-nav-item-dropdown>
 
         </b-navbar-nav>

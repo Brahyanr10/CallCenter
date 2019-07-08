@@ -9,6 +9,11 @@ import Listcomuna from './views/listcomuna.vue'
 import Editcomuna from './views/editcomuna.vue'
 import Listbarrio from './views/listbarrios.vue'
 import Editbarrio from './views/editbarrio.vue'
+import Listpuesto from './views/listvotacion.vue'
+import Eliminarusuario from './views/eliminarusers.vue'
+import Deletecomuna from './views/eliminarcomuna.vue'
+import Aggbarrio from './views/agregarbarrio.vue'
+import Deletebarrio from './views/eliminarbarrio.vue'
 
 Vue.use(Router)
 
@@ -37,9 +42,19 @@ export default new Router({
       component: Edituser
     },
     {
-      path: '/agergar/comuna',
+      path: '/eliminar/user',
+      name: 'eliminarusuario',
+      component: Eliminarusuario
+    },
+    {
+      path: '/agregar/comuna',
       name: 'aggcomuna',
       component: Aggcomuna
+    },
+    {
+      path: '/eliminar/comuna',
+      name: 'deletecomuna',
+      component: Deletecomuna
     },
     {
       path: '/listar/comuna',
@@ -60,6 +75,21 @@ export default new Router({
       path: '/editar/barrio',
       name: 'editbarrio',
       component: Editbarrio
-    }
+    },
+    {
+      path: '/agregar/barrio',
+      name: 'aggbarrio',
+      component: Aggbarrio
+    },
+    {
+      path: '/eliminar/barrio',
+      name: 'deletebarrio',
+      component: Deletebarrio
+    },
+    {
+      path: '/listar/puestovotacion',
+      name: 'listvotacion',
+      component: Listpuesto
+    },
   ]
 })

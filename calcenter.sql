@@ -7,9 +7,6 @@ CREATE TABLE IF NOT EXISTS `callcenter`.`tipo_usuario`(
 PRIMARY KEY (`idtipo_usuario`))
 ENGINE = InnoDB;
 
-
-
-
 CREATE TABLE IF NOT EXISTS `callcenter`.`Usuarios` (
 
 `idUsuarios` INT NOT NULL AUTO_INCREMENT,

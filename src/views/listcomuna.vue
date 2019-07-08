@@ -16,6 +16,9 @@
                 <td class="text-xs-left">{{ props.item.nom_comuna }}</td>
                 <router-link  :to="{ name: 'editcomuna', params: {id: props.item.idcomuna} }">
                   editar
+                </router-link>|
+                <router-link  :to="{ name: 'deletecomuna', params: {id: props.item.idcomuna} }">
+                  Eliminar
                 </router-link>
               </template>
             </v-data-table>
