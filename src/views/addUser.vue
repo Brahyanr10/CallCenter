@@ -76,7 +76,7 @@
             outline
           ></v-select> -->
 
-            <v-btn color="success" @click="validate">
+            <v-btn color="success" @click="agregarusuario">
               Validate
             </v-btn>
 

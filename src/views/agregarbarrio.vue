@@ -27,7 +27,7 @@
               bottom
               autocomplete
             ></v-select>
-            <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+            <div class="mt-3">Selected: <strong>{{ selected }}</strong></div>
 
             <v-btn color="success" @click="agregarbarrio">
               Validate
@@ -106,9 +106,10 @@ export default {
     },
     traercomunas() {
       axios
-        .post("http://localhost/api/api.php?action=listarcomuna")
+        .post("http://localhost/api/api.php?action=comunas")
         .then(res => {
           this.comunas = res.data.comuna;
+          this.selected=this.comunas[0].idcomuna
           console.log(this.comunas);
         });
     }

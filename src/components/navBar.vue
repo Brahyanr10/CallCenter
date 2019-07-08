@@ -25,8 +25,10 @@
 
           <b-nav-item-dropdown text="Puestos De Votacion" right>
             <b-dropdown-item :to="{name: 'listvotacion'}">Listado Puestos De Votacion</b-dropdown-item>
-            <b-dropdown-item :to="{name: ''}">Agregar Puestos De Votacion</b-dropdown-item>
+            <b-dropdown-item :to="{name: 'aggvotacion'}">Agregar Puestos De Votacion</b-dropdown-item>
           </b-nav-item-dropdown>
+          <b-nav-item :to="{name: 'listvotantes'}">Listado De Votantes</b-nav-item>
+          <b-nav-item :to="{name: 'aggvotantes'}">Agregar Votante</b-nav-item>
 
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">

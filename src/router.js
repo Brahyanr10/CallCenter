@@ -14,6 +14,12 @@ import Eliminarusuario from './views/eliminarusers.vue'
 import Deletecomuna from './views/eliminarcomuna.vue'
 import Aggbarrio from './views/agregarbarrio.vue'
 import Deletebarrio from './views/eliminarbarrio.vue'
+import Aggvotacion from './views/agregarvotacion.vue'
+import Editvotacion from './views/editvotacion.vue'
+import Deletepuesto from './views/eliminarpuesto.vue'
+import Aggvotantes from './views/agregarvotantes.vue'
+import Listvotantes from './views/listvotantes.vue'
+import Editvotantes from './views/editvotantes.vue'
 
 Vue.use(Router)
 
@@ -91,5 +97,35 @@ export default new Router({
       name: 'listvotacion',
       component: Listpuesto
     },
+    {
+      path: '/agergar/puestovotacion',
+      name: 'aggvotacion',
+      component: Aggvotacion
+    },
+    {
+      path: '/editar/puestovotacion',
+      name: 'editvotacion',
+      component: Editvotacion
+    },
+    {
+      path: '/eliminar/puestovotacion',
+      name: 'deletepuesto',
+      component: Deletepuesto
+    },
+    {
+      path: '/Agregar/Votantes',
+      name: 'aggvotantes',
+      component: Aggvotantes
+    },
+    {
+      path: '/listar/Votantes',
+      name: 'listvotantes',
+      component: Listvotantes
+    },
+    {
+      path: '/editar/Votantes',
+      name: 'editvotantes',
+      component: Editvotantes
+    }
   ]
 })

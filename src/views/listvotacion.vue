@@ -16,9 +16,13 @@
                 <td class="text-xs-left">{{ props.item.nombre }}</td>
                 <td class="text-xs-left">{{ props.item.direccion }}</td>
                 <td class="text-xs-left">{{ props.item.nom_barrio }}</td>
-                <router-link  class="text-xs-center" :to="{ name: 'editbarrio',
-                                                            params: {id: props.item.idbarrio} }">
+                <router-link  class="text-xs-center" :to="{ name: 'editvotacion',
+                                                            params: {id: props.item.idpuesto_votacion} }">
                   editar
+                </router-link>|
+                <router-link  class="text-xs-center" :to="{ name: 'deletepuesto',
+                                                            params: {id: props.item.idpuesto_votacion} }">
+                  Eliminar
                 </router-link>
               </template>
             </v-data-table>
