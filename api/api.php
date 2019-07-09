@@ -2,7 +2,7 @@
 header("Access-Control-Allow-Origin: *","content-type: text/html; charset=utf-8");
 // header("content-type: text/html; charset=utf-8");
 // mysqli_query("SET NAMES 'utf8'");
-$conn = new mysqli( 'localhost', 'root', '', 'callcenter' );
+$conn = new mysqli( 'localhost', 'root', '', 'callcenter2' );
 $acentos = $conn->query("SET NAMES 'utf8'");
 if ( $conn->connect_error ) {
   die( 'Error al conectarse a la base de datos' );
@@ -449,9 +449,9 @@ if($action=='agregarvotante'){
 
 if($action =='listarvotantes'){
   $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                            INNER JOIN barrio
+                            LEFT OUTER JOIN barrio
                             ON barrio.idbarrio = datos.idbarrio
-                            INNER JOIN puesto_votacion
+                             LEFT OUTER JOIN puesto_votacion
                             ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion" );
   $votantes = array();
   while ( $row = $result->fetch_assoc() ) {
@@ -524,59 +524,60 @@ if($action=='busqueda'){
   $datos =$_POST['datos'];
   if ($idbusqueda==1) {
 
-    $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+    $result = $conn->query( " SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE datos.num_planilla LIKE '%$datos%' " );
   }
   if ($idbusqueda==2) {
-    $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+
+    $result = $conn->query( " SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE datos.lider_referido LIKE '%$datos%' " );
   }
-  if ($idbusqueda==2) {
+  if ($idbusqueda==3) {
     $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE datos.nombres LIKE '%$datos%' " );
   }
   if ($idbusqueda==4) {
     $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE datos.apellidos LIKE '%$datos%' " );
 
   }
   if ($idbusqueda==5) {
     $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE barrio.nom_barrio LIKE '%$datos%' " );
   }
   if ($idbusqueda==6) {
     $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE barrio.email LIKE '%$datos%' " );
   }
   if ($idbusqueda==7) {
     $result = $conn->query( "SELECT datos.*, puesto_votacion.nombre, barrio.nom_barrio  FROM datos
-                              INNER JOIN barrio
+                              LEFT OUTER JOIN barrio
                               ON barrio.idbarrio = datos.idbarrio
-                              INNER JOIN puesto_votacion
+                              LEFT OUTER JOIN puesto_votacion
                               ON puesto_votacion.idpuesto_votacion = datos.id_puesto_votacion
                               WHERE puesto_votacion.nombre LIKE '%$datos%' " );
   }

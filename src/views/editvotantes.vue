@@ -7,7 +7,7 @@
 
             <h4>Editar votante</h4>
             <br>
-            
+
             <v-text-field
               name="planilla"
               v-model="planilla"
@@ -19,8 +19,17 @@
               clearable
             ></v-text-field>
 
+            <v-select
+              :items="lider"
+              item-text="text"
+              v-model="selected3"
+              item-value="value"
+              label="Seleccione el puesto de votacion"
+              bottom
+              autocomplete
+            ></v-select>
 
-            <v-text-field
+            <!-- <v-text-field
               name="lider_referido"
               v-model="lider_referido"
               :rules="nameRules"
@@ -28,7 +37,7 @@
               required
               outline
               clearable
-            ></v-text-field>
+            ></v-text-field> -->
 
             <v-text-field
               name="nombres"
@@ -138,6 +147,7 @@ export default {
       idvotante: this.$route.params.id,
       selected1: { idbarrio: " " },
       selected2: { idpuesto_votacion: " " },
+      selected3: { value: " " },
       planilla:" ",
       lider_referido: " ",
       nombres: " ",
@@ -149,6 +159,14 @@ export default {
       email: " ",
       puestos:[],
       datos:[],
+      lider:[
+        {value:"", text:""},
+        {value:"Lider", text:"Lider"},
+        {value:"Referido", text:"Referido"},
+        {value:"Coordinador", text:"Coordinador"},
+        {value:"Otro", text:"Otro"},
+
+      ],
       idRules: [
         id => !!id || "Numero de Comuna es requerido",
         id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
@@ -185,7 +203,7 @@ export default {
             .then(res => {
               this.datos=res.data.datos;
               this.planilla=this.datos[0].num_planilla;
-              this.lider_referido=this.datos[0].lider_referido;
+              this.selected3=this.datos[0].lider_referido;
               this.nombres=this.datos[0].nombres;
               this.apellidos=this.datos[0].apellidos
               this.identificacion=this.datos[0].identificacion;
@@ -208,7 +226,7 @@ export default {
       let params = new FormData();
       params.append("iddatos", this.idvotante);
       params.append("planilla", this.planilla);
-      params.append("lider_referido", this.lider_referido);
+      params.append("lider_referido", this.selected3);
       params.append("nombres", this.nombres);
       params.append("apellidos", this.apellidos);
       params.append("identificacion", this.identificacion);

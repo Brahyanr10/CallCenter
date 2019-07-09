@@ -18,7 +18,17 @@
               clearable
             ></v-text-field>
 
-            <v-text-field
+            <v-select
+              :items="lider"
+              item-text="text"
+              v-model="selected3"
+              item-value="value"
+              label="Seleccione el tipo de persona"
+              bottom
+              autocomplete
+            ></v-select>
+
+            <!-- <v-text-field
               name="lider_referido"
               v-model="lider_referido"
               :rules="nameRules"
@@ -26,7 +36,7 @@
               required
               outline
               clearable
-            ></v-text-field>
+            ></v-text-field> -->
 
             <v-text-field
               name="nombres"
@@ -115,7 +125,11 @@
             </div>
             <div class="mt-3">
               Selected: <strong>{{ selected2 }}</strong>
+            </div>
+            <div class="mt-3">
+              Selected: <strong>{{ selected3 }}</strong>
             </div> -->
+
 
             <v-btn color="success" @click="agregarvotante">
               Validate
@@ -136,6 +150,7 @@ export default {
   data: () => ({
     selected1: { idbarrio: " " },
     selected2: { idpuesto_votacion: " " },
+    selected3: { value: " " },
     planilla: " ",
     lider_referido: " ",
     nombres: " ",
@@ -147,6 +162,15 @@ export default {
     email: " ",
     puesto: [],
     votante: [],
+    lider:[
+      {value:"", text:""},
+      {value:"Lider", text:"Lider"},
+      {value:"Referido", text:"Referido"},
+      {value:"Coordinador", text:"Coordinador"},
+      {value:"Otro", text:"Otro"},
+
+    ],
+
     idRules: [
       id => !!id || "Numero de Comuna es requerido",
       id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
@@ -164,6 +188,7 @@ export default {
       axios.post("http://localhost/api/api.php?action=puestos").then(res => {
         this.puestos = res.data.puesto;
         this.selected2 = this.puestos[0].idpuesto_votacion;
+        this.selected3=this.lider[0].value
       });
     },
     agregarvotante() {
@@ -175,7 +200,7 @@ export default {
       };
       let params = new FormData();
       params.append("planilla", this.planilla);
-      params.append("lider_referido", this.lider_referido);
+      params.append("lider_referido", this.selected3);
       params.append("nombres", this.nombres);
       params.append("apellidos", this.apellidos);
       params.append("identificacion", this.identificacion);
