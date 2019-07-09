@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand class="Logo" :to="{ name: 'index' }">
-        <span class="icon-Logo">CallCenter</span>
+      <b-navbar-brand :to="{ name: 'index' }">
+        CallCenter
       </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
@@ -17,7 +17,7 @@
             >Lista De Usuarios</b-nav-item
           >
 
-          <b-nav-item-dropdown text="comuna" right>
+          <b-nav-item-dropdown text="Comuna" right>
             <b-dropdown-item :to="{ name: 'listcomuna' }"
               >Listado De comunas</b-dropdown-item
             >
@@ -57,7 +57,6 @@
           >
             Iniciar Sesión
           </v-btn>
-        </b-navbar-nav>
         <b-nav-item-dropdown v-if="mostrar" right>
           <template slot="button-content" class="glyphicon glyphicon-user"
             ><span id="navItems">{{ usuario[0].nombre }}</span>
@@ -68,6 +67,8 @@
           >
           <!-- <span class="glyphicon glyphicon-user"></span> {{this.students[0].nombre}} -->
         </b-nav-item-dropdown>
+      </b-navbar-nav>
+
       </b-collapse>
     </b-navbar>
 
@@ -168,6 +169,22 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+/* NavItem */
+.navbar {
+  border-top-right-radius: 0px;
+  border-top-left-radius: 0px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  /* margin: auto; */
+}
+#navItems {
+    color: white;
+}
+.nav-link {
+  font-size: 15px;
+  width: 100%;
+  margin-right: 10px;
+}
 
 </style>

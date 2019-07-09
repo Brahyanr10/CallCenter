@@ -4,38 +4,58 @@
       <v-card>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              name="identificacion"
-              v-model="identificacion"
-              :counter="10"
-              :rules="idRules"
-              label="Identificación"
-              required
-              outline
-              clearable
-            ></v-text-field>
+            <div class="LoginDivider">
+              <span class="LoginDivider-text">
+                <span>Inicio de sesión</span>
+              </span>
+              <div class="inputs">
+                <v-text-field
+                  name="identificacion"
+                  v-model="identificacion"
+                  :counter="10"
+                  :rules="idRules"
+                  label="Tu Identificación"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-            <v-text-field
-              name="password"
-              v-model="password"
-              :counter="8"
-              :rules="passwordRules"
-              :type="'password'"
-              label="Contraseña"
-              required
-              outline
-              clearable
-            ></v-text-field>
+                <v-text-field
+                  name="password"
+                  v-model="password"
+                  :counter="8"
+                  :rules="passwordRules"
+                  :type="'password'"
+                  label="Tu Contraseña"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
+                <v-btn
+                  color="success"
+                  class="btn-Green btn--md"
+                  @click="iniciosesion"
+                >
+                  <span>Inicia sesión</span>
+                </v-btn>
 
-            <v-btn color="success" @click="iniciosesion">
-              Validate
-            </v-btn>
-
-            <v-btn color="error" @click="reset">
-              Reset Form
-            </v-btn>
+                <!-- <v-btn color="error" @click="reset">
+                  Reset Form
+                </v-btn> -->
+              </div>
+            </div>
           </v-form>
         </v-card-text>
+        <div class="AccountFooter" data-reactid="33">
+          <div class="AccountFooter-create" data-reactid="34">
+            <span data-reactid="35">¿Aún no tienes cuenta?</span>
+          </div>
+          <div class="AccountFooter-link" data-reactid="36">
+            <a href="/signup/" class="AccountFooter-btn" data-reactid="37"
+              ><span data-reactid="38">Regístrate</span></a
+            >
+          </div>
+        </div>
       </v-card>
     </v-flex>
   </v-layout>
@@ -117,5 +137,137 @@ export default {
 <style lang="css" scoped>
 .v-card__text {
     margin-top: 50px;
+}
+.inputs {
+    margin-top: 40px;
+}
+.LoginDivider-text::before {
+  content: "";
+  position: absolute;
+  top: 53%;
+  right: 100%;
+  width: 1000px;
+  border-bottom: 1.5px solid #757575;
+}
+.LoginDivider-text:after {
+  content: "";
+  position: absolute;
+  top: 53%;
+  left: 100%;
+  width: 5000px;
+  border-bottom: 1.5px solid #757575;
+}
+.LoginDivider-text {
+  position: relative;
+  /* font-family: "cooper_hewittmedium"; */
+  padding: 12px;
+  font-weight: 600;
+  color: #1c3643;
+  font-size: 20px;
+}
+.LoginDivider {
+  text-align: center;
+  overflow: hidden;
+  margin: 1rem auto;
+  width: 94%;
+}
+
+.btn-Green,
+.btn-green {
+  background: -webkit-linear-gradient(
+    right,
+    #95ca3e 0%,
+    #95ca3e 50%,
+    #85c638 100%
+  );
+}
+.btn,
+.btn-Green,
+.btn-green {
+  background-color: #d3d3d3;
+  border: none;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "Lato", sans-serif;
+  font-size: 13px;
+  padding: 8px 0.8em 6px 0.8em;
+  text-decoration: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-transition: 0.2s;
+  -moz-transition: 0.2s;
+  -o-transition: 0.2s;
+  -ms-transition: 0.2s;
+  transition: 0.2s;
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline: 0;
+}
+.btn-Green {
+  height: 45px;
+  width: 100%;
+}
+
+.AccountFooter-create {
+  margin-bottom: 16px;
+}
+/* @media only screen and (min-width: 64em) .AccountFooter {
+  padding: 24px 32px;
+}
+@media only screen and (min-width: 48em) .AccountFooter {
+  padding: 24px 42px;
+} */
+.AccountFooter {
+  padding: 24px 10px;
+  margin-top: 10px;
+  background-color: #f3f3f6;
+  text-align: center;
+
+}
+.AccountFooter-create span {
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.37;
+  color: #3a3c3f;
+}
+.AccountFooter-btn {
+  display: block;
+  font-size: 16px;
+  padding: 12px 0.8em 12px 0.8em;
+  font-size: 1rem;
+  border: 1.5px solid #0791e6;
+  -webkit-border-radius: 4px;
+  border-radius: 4px;
+  color: #0791e6;
+  cursor: pointer;
+  outline: none;
+  background: #fff;
+  text-decoration: none;
+  font-weight: bold;
+}
+.btn--medium,
+.btn--md {
+  font-size: 1rem;
+}
+.v-btn.theme--light .v-btn__content span {
+  font-size: 16px;
+}
+.success {
+    margin-left: 0px;
 }
 </style>
