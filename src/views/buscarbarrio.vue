@@ -70,6 +70,13 @@ export default {
         .post("http://localhost/api/api.php?action=busquedabarrio", params, config)
         .then(res => {
             this.barrio = res.data.barrio;
+            if (this.barrio.length == 0) {
+              Swal.fire({
+                type: 'error',
+                title: 'Error...',
+                text: 'No se encuentra el barrio',
+                })
+            }
         });
     }
   }

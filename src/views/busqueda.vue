@@ -89,7 +89,13 @@ export default {
         .post("http://localhost/api/api.php?action=busqueda", params, config)
         .then(res => {
             this.votantes = res.data.votantes;
-            console.log(this.votantes);
+            if (this.votantes.length == 0) {
+              Swal.fire({
+                type: 'error',
+                title: 'Error...',
+                text: 'No se encuentra informacion',
+                })
+            }
         });
     }
   }

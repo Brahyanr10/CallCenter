@@ -70,6 +70,13 @@ export default {
         .post("http://localhost/api/api.php?action=busquedapuesto", params, config)
         .then(res => {
           this.puesto = res.data.puesto;
+          if (this.puesto.length == 0) {
+            Swal.fire({
+              type: 'error',
+              title: 'Error...',
+              text: 'No se encuentra el Puesto de votacion',
+              })
+          }
 
         });
     }
