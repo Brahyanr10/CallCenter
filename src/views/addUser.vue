@@ -96,6 +96,7 @@ export default {
     usuario:[],
     identificacion: "",
     nombre: "",
+    phone:"",
     apellido: "",
     password: "",
     verificacion:0,
