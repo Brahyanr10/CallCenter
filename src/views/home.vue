@@ -1,6 +1,13 @@
 <template >
   <div class="">
-    <h1>bienvenido</h1>
+    <v-flex xs12 sm4 offset-sm4>
+      <v-card>
+        <v-card-text>
+          <h1>Bienvenido</h1>
+        </v-card-text>
+      </v-card>
+    </v-flex>
+
   </div>
 </template>
 
@@ -9,5 +16,8 @@ export default {
 }
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.v-card__text {
+    margin-top: 40px;
+}
 </style>

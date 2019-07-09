@@ -46,16 +46,6 @@
             </div>
           </v-form>
         </v-card-text>
-        <div class="AccountFooter" data-reactid="33">
-          <div class="AccountFooter-create" data-reactid="34">
-            <span data-reactid="35">¿Aún no tienes cuenta?</span>
-          </div>
-          <div class="AccountFooter-link" data-reactid="36">
-            <a href="/signup/" class="AccountFooter-btn" data-reactid="37"
-              ><span data-reactid="38">Regístrate</span></a
-            >
-          </div>
-        </div>
       </v-card>
     </v-flex>
   </v-layout>
@@ -232,34 +222,6 @@ export default {
 @media only screen and (min-width: 48em) .AccountFooter {
   padding: 24px 42px;
 } */
-.AccountFooter {
-  padding: 24px 10px;
-  margin-top: 10px;
-  background-color: #f3f3f6;
-  text-align: center;
-
-}
-.AccountFooter-create span {
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 1.37;
-  color: #3a3c3f;
-}
-.AccountFooter-btn {
-  display: block;
-  font-size: 16px;
-  padding: 12px 0.8em 12px 0.8em;
-  font-size: 1rem;
-  border: 1.5px solid #0791e6;
-  -webkit-border-radius: 4px;
-  border-radius: 4px;
-  color: #0791e6;
-  cursor: pointer;
-  outline: none;
-  background: #fff;
-  text-decoration: none;
-  font-weight: bold;
-}
 .btn--medium,
 .btn--md {
   font-size: 1rem;
