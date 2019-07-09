@@ -12,13 +12,13 @@
               class="elevation-1"
             >
               <template v-slot:items="props">
-                <td>{{ props.item.idUsuarios }}</td>
+                <!-- <td>{{ props.item.idUsuarios }}</td> -->
+                <td class="text-xs-left">{{ props.item.identificacion }}</td>
                 <td class="text-xs-left">{{ props.item.nombre }}</td>
                 <td class="text-xs-left">{{ props.item.apellido }}</td>
                 <td class="text-xs-left">{{ props.item.Correo }}</td>
                 <td class="text-xs-left">{{ props.item.telefono }}</td>
                 <td class="text-xs-left">{{ props.item.password }}</td>
-                <td class="text-xs-left">{{ props.item.id_tipo_usuario }}</td>
                 <router-link  :to="{ name: 'editusers', params: {id: props.item.idUsuarios} }">
                   editar
                 </router-link>|
@@ -40,18 +40,16 @@ export default {
     return {
       users:[],
       headers: [
-        {
-          text: 'Id Usuario',
-          align: 'center',
-          sortable: false,
-          value: 'name'
-        },
-        { text: 'Nombre', align: 'center', sortable: false, value: '' },
-        { text: 'Apellido', value: '' },
-        { text: 'Correo', value: '' },
-        { text: 'Telefono', value: '' },
-        { text: 'Password', value: '' },
-        { text: 'tipo usuario', value: '' },
+        { text: 'Identificacion',
+        align: 'center',
+        sortable: false,
+        value: 'identificación' },
+
+        { text: 'Nombre', align: 'center', value: 'nombre' },
+        { text: 'Apellido', value: 'apellido' },
+        { text: 'Correo', value: 'Correo' },
+        { text: 'Telefono', value: 'telefono' },
+        { text: 'Password', value: 'Password' },
         {text: 'accion', value: '' }
       ]
     };

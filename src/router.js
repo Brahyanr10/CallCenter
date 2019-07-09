@@ -20,6 +20,11 @@ import Deletepuesto from './views/eliminarpuesto.vue'
 import Aggvotantes from './views/agregarvotantes.vue'
 import Listvotantes from './views/listvotantes.vue'
 import Editvotantes from './views/editvotantes.vue'
+import Deletevotantes from './views/eliminarvotantes.vue'
+import Home from './views/home.vue'
+import Busqueda from './views/busqueda.vue'
+import Busquedabarrio from './views/buscarbarrio.vue'
+import Busquepuesto from './views/buscarpuesto.vue'
 
 Vue.use(Router)
 
@@ -31,6 +36,26 @@ export default new Router({
       path: '/',
       name: 'index',
       component: Index
+    },
+    {
+      path: '/busquedabarrio',
+      name: 'busquedabarrio',
+      component: Busquedabarrio
+    },
+    {
+      path: '/busquedapuesto',
+      name: 'busquedapuesto',
+      component: Busquepuesto
+    },
+    {
+      path: '/busqueda',
+      name: 'busqueda',
+      component: Busqueda
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home
     },
     {
       path: '/create/user',
@@ -126,6 +151,11 @@ export default new Router({
       path: '/editar/Votantes',
       name: 'editvotantes',
       component: Editvotantes
+    },
+    {
+      path: '/eliminar/Votantes',
+      name: 'deletevotantes',
+      component: Deletevotantes
     }
   ]
 })

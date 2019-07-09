@@ -1,12 +1,11 @@
-<template >
+<template>
   <v-layout>
     <v-flex xs12 sm4 offset-sm4>
       <v-card>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
-
             <h4>Agregar votante</h4>
-            <br>
+            <br />
 
             <v-text-field
               name="planilla"
@@ -18,7 +17,6 @@
               outline
               clearable
             ></v-text-field>
-
 
             <v-text-field
               name="lider_referido"
@@ -112,8 +110,12 @@
               autocomplete
             ></v-select>
 
-            <div class="mt-3">Selected: <strong>{{ selected1}}</strong></div>
-            <div class="mt-3">Selected: <strong>{{ selected2 }}</strong></div>
+            <!-- <div class="mt-3">
+              Selected: <strong>{{ selected1 }}</strong>
+            </div>
+            <div class="mt-3">
+              Selected: <strong>{{ selected2 }}</strong>
+            </div> -->
 
             <v-btn color="success" @click="agregarvotante">
               Validate
@@ -134,40 +136,37 @@ export default {
   data: () => ({
     selected1: { idbarrio: " " },
     selected2: { idpuesto_votacion: " " },
-    planilla:" ",
+    planilla: " ",
     lider_referido: " ",
     nombres: " ",
     apellidos: " ",
     identificacion: " ",
     celular: " ",
-    direccion:" ",
+    direccion: " ",
     barrios: [],
     email: " ",
-    puesto:[],
+    puesto: [],
+    votante: [],
     idRules: [
       id => !!id || "Numero de Comuna es requerido",
       id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
     ]
   }),
-  created(){
+  created() {
     this.traerdatos();
   },
-  methods:{
-    traerdatos(){
-      axios
-        .post("http://localhost/api/api.php?action=barrios")
-        .then(res => {
-          this.barrios = res.data.barrio;
-          this.selected1=this.barrios[0].idbarrio
-        });
-        axios
-          .post("http://localhost/api/api.php?action=puestos")
-          .then(res => {
-            this.puestos = res.data.puesto;
-            this.selected2=this.puestos[0].idpuesto_votacion
-          });
+  methods: {
+    traerdatos() {
+      axios.post("http://localhost/api/api.php?action=barrios").then(res => {
+        this.barrios = res.data.barrio;
+        this.selected1 = this.barrios[0].idbarrio;
+      });
+      axios.post("http://localhost/api/api.php?action=puestos").then(res => {
+        this.puestos = res.data.puesto;
+        this.selected2 = this.puestos[0].idpuesto_votacion;
+      });
     },
-    agregarvotante(){
+    agregarvotante() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -187,17 +186,44 @@ export default {
       params.append("idpuesto", this.selected2);
       axios
         .post(
-          "http://localhost/api/api.php?action=agregarvotante",
+          "http://localhost/api/api.php?action=buscarvotante",
           params,
           config
         )
         .then(res => {
+          this.votante = res.data.votante;
+          if (this.votante.length == 0) {
+            axios
+              .post(
+                "http://localhost/api/api.php?action=agregarvotante",
+                params,
+                config
+              )
+              .then(res => {
+                Swal.fire({
+                  position: "top",
+                  type: "success",
+                  title: "Votante registrad con exito",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+                  this.reset();
+              });
+          }else {
+            Swal.fire({
+              type: 'error',
+              title: 'Error...',
+              text: 'La identificacion ya esta registrada',
 
-
-        })
-    }
+              })
+          }
+        });
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
   }
-}
+};
 </script>
 
 <style lang="css" scoped>

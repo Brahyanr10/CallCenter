@@ -181,6 +181,13 @@ export default {
       axios
         .post("http://localhost/api/api.php?action=updateusuario", params, config)
         .then(res => {
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Usuario actualizado con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.$router.push({ name: "listusers" });
 
         });

@@ -7,7 +7,7 @@
 
             <h4>Editar votante</h4>
             <br>
-
+            
             <v-text-field
               name="planilla"
               v-model="planilla"
@@ -115,7 +115,7 @@
             <!-- <div class="mt-3">Selected: <strong>{{ selected1}}</strong></div>
             <div class="mt-3">Selected: <strong>{{ selected2 }}</strong></div> -->
 
-            <v-btn color="success" @click="agregarvotante">
+            <v-btn color="success" @click="updatevotantes">
               Validate
             </v-btn>
 
@@ -198,13 +198,45 @@ export default {
             });
 
     },
+    updatevotantes(){
+      let config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      let params = new FormData();
+      params.append("iddatos", this.idvotante);
+      params.append("planilla", this.planilla);
+      params.append("lider_referido", this.lider_referido);
+      params.append("nombres", this.nombres);
+      params.append("apellidos", this.apellidos);
+      params.append("identificacion", this.identificacion);
+      params.append("celular", this.celular);
+      params.append("direccion", this.direccion);
+      params.append("idbarrio", this.selected1);
+      params.append("email", this.email);
+      params.append("idpuesto", this.selected2);
+      axios
+        .post("http://localhost/api/api.php?action=updatevotantes", params, config)
+        .then(res => {
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Votante actualizado con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.$router.push({ name: "listvotantes" });
+
+        })
+    }
   }
-
-
-
-
 }
 </script>
 
 <style lang="css" scoped>
+.v-card__text {
+    margin-top: 50px;
+}
 </style>

@@ -4,7 +4,7 @@
       <v-card>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation >
-            <h4>Editar barrio</h4>
+            <h4>Editar Punto de votacion</h4>
             <br>
             <v-text-field
               name='punto_votacion'
@@ -110,7 +110,14 @@ export default {
       axios
         .post("http://localhost/api/api.php?action=updatepuesto", params, config)
         .then(res => {
-
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Usuario actualizado con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.$router.push({ name: "listvotacion" });
 
         });
     }
@@ -119,4 +126,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.v-card__text {
+    margin-top: 50px;
+}
 </style>

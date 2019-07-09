@@ -1,146 +1,209 @@
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`tipo_usuario`(
-`idtipo_usuario` INT NOT NULL AUTO_INCREMENT,
 
-`descripcion` VARCHAR(45) NOT NULL,
 
-PRIMARY KEY (`idtipo_usuario`))
-ENGINE = InnoDB;
+CREATE TABLE `barrio` (
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`Usuarios` (
+`idbarrio` int(11) NOT NULL,
 
-`idUsuarios` INT NOT NULL AUTO_INCREMENT,
+`nom_barrio` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
 
-`identificacion` INT NOT NULL,
+`idcomuna` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-`nombre` VARCHAR(45) NOT NULL,
 
-`apellido` VARCHAR(45) NOT NULL,
-`Correo` VARCHAR(45) NOT NULL,
+CREATE TABLE `comuna` (
 
-`telefono` INT NULL,
+`idcomuna` int(11) NOT NULL,
 
-`password` VARCHAR(45) NOT NULL,
+`nom_comuna` varchar(45)
+COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-`id_tipo_usuario` INT NOT NULL,
-  PRIMARY KEY (`idUsuarios`),
 
-CONSTRAINT `usuario_tipo`
- FOREIGN KEY (`id_tipo_usuario`)
-REFERENCES `callcenter`.`tipo_usuario` (`idtipo_usuario`)
 
-ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+CREATE TABLE `datos` (
 
+`iddatos` int(11) NOT NULL,
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`comuna` (
+`num_planilla` varchar(45)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
-`idcomuna` INT NOT NULL AUTO_INCREMENT,
+`lider_referido` varchar(60)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
-`nom_comuna` VARCHAR(45) NOT NULL,
+`nombres` varchar(60)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
-PRIMARY KEY (`idcomuna`))
-ENGINE = InnoDB;
+`apellidos` varchar(45)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
+`identificacion` int(11) DEFAULT NULL,
 
+`celular` int(11) DEFAULT NULL,
 
+`direccion` varchar(100)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`barrio` (
+`idbarrio` int(11) DEFAULT NULL,
 
-`idbarrio` INT NOT NULL AUTO_INCREMENT,
+`email` varchar(60)
+COLLATE utf8_spanish_ci DEFAULT NULL,
 
-`nom_barrio` VARCHAR(45) NOT NULL,
+`id_puesto_votacion` int(11) DEFAULT NULL
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-`idcomuna` INT NULL,
+;
 
-PRIMARY KEY (`idbarrio`),
+-- --------------------------------------------------------
 
+--
+-- Estructura de tabla para la tabla `puesto_votacion`
+--
 
-CONSTRAINT `barrio_comuna`
 
-FOREIGN KEY (`idcomuna`)
+CREATE TABLE `puesto_votacion` (
 
-REFERENCES `callcenter`.`comuna` (`idcomuna`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+`idpuesto_votacion` int(11) NOT NULL,
 
+`nombre` varchar(80) COLLATE utf8_spanish_ci NOT NULL,
 
+`direccion` varchar(80) COLLATE utf8_spanish_ci DEFAULT NULL,
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`puesto_votacion` (
+`idbarrio` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-`idpuesto_votacion` INT NOT NULL AUTO_INCREMENT,
 
-`nombre` VARCHAR(80) NOT NULL,
 
-`direccion` VARCHAR(80) NULL,
 
-`idbarrio` INT NOT NULL,
+-- --------------------------------------------------------
 
-PRIMARY KEY (`idpuesto_votacion`),
+--
+-- Estructura de tabla para la tabla `tipo_usuario`
+--
 
-CONSTRAINT `puesto_barrio`
-    FOREIGN KEY (`idbarrio`)
 
- REFERENCES `callcenter`.`barrio` (`idbarrio`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
+CREATE TABLE `tipo_usuario` (
 
+`idtipo_usuario` int(11) NOT NULL,
+  `
+descripcion` varchar(45)
+COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-CREATE TABLE IF NOT EXISTS `callcenter`.`datos` (
 
-`iddatos` INT NOT NULL AUTO_INCREMENT,
 
-`num_planilla` VARCHAR(45) NULL,
+-- --------------------------------------------------------
 
-` nombres` VARCHAR(45) NOT NULL,
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
 
-`apellidos` VARCHAR(45) NOT NULL,
 
-`celular` INT NULL,
+CREATE TABLE `usuarios`(
 
-`direccion` VARCHAR(100) NULL,
+`idUsuarios` int(11) NOT NULL,
 
-`idbarrio` INT NULL,
+`identificacion` int(11) NOT NULL,
 
-`email` VARCHAR(60) NULL,
+`nombre` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
 
-`id_puesto_votacion` INT NULL,
+`apellido` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
 
-`idusuario` INT NOT NULL,
+`Correo` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
 
-PRIMARY KEY (`iddatos`),
+`telefono` int(11) DEFAULT NULL,
+  `password` varchar(45) COLLATE utf8_spanish_ci NOT NULL,
 
-CONSTRAINT `datos_barrio`
+`id_tipo_usuario` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
-FOREIGN KEY (`idbarrio`)
 
-REFERENCES `callcenter`.`barrio` (`idbarrio`)
 
-ON DELETE CASCADE
-    ON UPDATE CASCADE,
 
-CONSTRAINT `datos_usuario`
+ALTER TABLE `barrio`
+  ADD PRIMARY KEY (`idbarrio`),
+  ADD KEY `barrio_comuna` (`idcomuna`);
 
-FOREIGN KEY (`idusuario`)
 
-REFERENCES `callcenter`.`Usuarios` (`idUsuarios`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
 
-CONSTRAINT `datos_puestos`
+ALTER TABLE `comuna`
+  ADD PRIMARY KEY (`idcomuna`);
 
-FOREIGN KEY (`id_puesto_votacion`)
 
-REFERENCES `callcenter`.`puesto_votacion` (`idpuesto_votacion`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE)
-ENGINE = InnoDB;
 
+ALTER TABLE `datos`
+  ADD PRIMARY KEY (`iddatos`),
 
+ADD KEY `datos_barrio` (`idbarrio`),
 
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+ADD KEY `datos_puestos` (`id_puesto_votacion`);
+
+
+
+
+ALTER TABLE `puesto_votacion`
+  ADD PRIMARY KEY (`idpuesto_votacion`),
+
+ADD KEY `puesto_barrio` (`idbarrio`);
+
+
+ALTER TABLE `tipo_usuario`
+  ADD PRIMARY KEY (`idtipo_usuario`);
+
+
+
+
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`idUsuarios`),
+
+ADD KEY `usuario_tipo` (`id_tipo_usuario`);
+
+
+ALTER TABLE `barrio`
+  MODIFY `idbarrio` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+
+ALTER TABLE `comuna`
+  MODIFY `idcomuna` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+ALTER TABLE `datos`
+  MODIFY `iddatos` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+ALTER TABLE `puesto_votacion`
+  MODIFY `idpuesto_votacion` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+
+
+ALTER TABLE `tipo_usuario`
+  MODIFY `idtipo_usuario` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+
+ALTER TABLE `usuarios`
+  MODIFY `idUsuarios` int(11) NOT NULL AUTO_INCREMENT,
+AUTO_INCREMENT=1;
+
+
+ALTER TABLE `barrio`
+  ADD CONSTRAINT `barrio_comuna` FOREIGN KEY (`idcomuna`) REFERENCES `comuna` (`idcomuna`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+ALTER TABLE `datos`
+  ADD CONSTRAINT `datos_barrio` FOREIGN KEY (`idbarrio`) REFERENCES `barrio` (`idbarrio`) ON DELETE CASCADE ON UPDATE CASCADE,
+
+ADD CONSTRAINT `datos_puestos` FOREIGN KEY (`id_puesto_votacion`) REFERENCES `puesto_votacion` (`idpuesto_votacion`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `puesto_votacion`
+  ADD CONSTRAINT `puesto_barrio` FOREIGN KEY (`idbarrio`) REFERENCES `barrio` (`idbarrio`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+
+
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuario_tipo` FOREIGN KEY (`id_tipo_usuario`) REFERENCES `tipo_usuario` (`idtipo_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;

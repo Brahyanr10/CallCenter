@@ -6,20 +6,6 @@
           <v-card-text>
             <h4>Listado De  Barrios</h4>
             <br>
-            <v-text-field
-              name='dato'
-              v-model="dato"
-              :counter="20"
-              :rules="idRules"
-              label="Barrio a buscar"
-              required
-              outline
-              clearable
-            ></v-text-field>
-            <router-link  class="text-xs-center" :to="{ name: 'busquedabarrio',
-                                                        params: {dato:this.dato} }">
-              buscar
-            </router-link>
             <v-data-table
               :headers="headers"
               :items="barrio"
@@ -44,14 +30,15 @@
       </V-flex>
     </v-app>
   </div>
+
 </template>
 
 <script>
 export default {
   data () {
     return {
-      dato:"",
       barrio:[],
+      datos:this.$route.params.dato,
       headers: [
         {
           text: 'Id Barrio',
@@ -66,22 +53,28 @@ export default {
     };
   },
   created(){
-    this.listarbarrio();
+    this.traerdatos();
   },
-  methods:{
-    listarbarrio(){
-      axios
-        .post("http://localhost/api/api.php?action=listarbarrio")
-        .then(res => {
-          this.barrio = res.data.barrio;
-          console.log(this.barrio);
 
+  methods:{
+    traerdatos(){
+      let config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      let params = new FormData();
+      params.append("datos", this.datos);
+      axios
+        .post("http://localhost/api/api.php?action=busquedabarrio", params, config)
+        .then(res => {
+            this.barrio = res.data.barrio;
         });
     }
   }
 }
 </script>
-
 
 <style lang="css" scoped>
 .v-card__text {

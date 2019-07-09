@@ -113,7 +113,7 @@ export default {
               Swal.fire({
                 position: 'top',
                 type: 'success',
-                title: 'Comuna registrada con exito',
+                title: 'Puesto de votacion registrada con exito',
                 showConfirmButton: false,
                 timer: 1500
               })
@@ -122,13 +122,15 @@ export default {
             Swal.fire({
               type: 'error',
               title: 'Error...',
-              text: 'La comuna ya esta registrada',
+              text: 'Puesto ya esta registrada',
 
               })
           }
         });
-
-    }
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
   }
 }
 </script>

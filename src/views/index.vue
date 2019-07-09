@@ -3,9 +3,9 @@
     <v-flex xs12 sm4 offset-sm4>
       <v-card>
         <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation >
+          <v-form ref="form" v-model="valid" lazy-validation>
             <v-text-field
-              name='identificacion'
+              name="identificacion"
               v-model="identificacion"
               :counter="10"
               :rules="idRules"
@@ -16,12 +16,11 @@
             ></v-text-field>
 
             <v-text-field
-              name='password'
+              name="password"
               v-model="password"
               :counter="8"
               :rules="passwordRules"
               :type="'password'"
-
               label="Contraseña"
               required
               outline
@@ -45,7 +44,8 @@
 <script>
 export default {
   data: () => ({
-    usuario:[],
+    nombrecookie1: "idUser",
+    usuario: [],
     identificacion: "",
     password: "",
     idRules: [
@@ -66,15 +66,14 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
-      }
-      else {
+      } else {
         this.iniciosesion();
       }
     },
     reset() {
       this.$refs.form.reset();
     },
-    iniciosesion(){
+    iniciosesion() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded"
@@ -86,27 +85,31 @@ export default {
       axios
         .post("http://localhost/api/api.php?action=login", params, config)
         .then(res => {
-          this.usuario=res.data.usuario;
-
+          this.usuario = res.data.usuario;
           if (
             this.identificacion == this.usuario[0].identificacion &&
             this.password == this.usuario[0].password
           ) {
             document.cookie =
-                this.nombrecookie1 + "=" + this.usuario[0].idUsuarios + ";" + "path=/";
-            // this.snackbar = true;
-            // this.color='cyan darken-2';
-            // this.text = "Bienvendio, " + this.students[0].nombre;
-            // document.cookie="iduser = " + this.students[0].id + ";" + "path=/";
+              this.nombrecookie1 +
+              "=" +
+              this.usuario[0].idUsuarios +
+              ";" +
+              "path=/";
             this.ruta();
             // console.log(res.data.usuario);
+          } else {
+            Swal.fire({
+              type: "error",
+              title: "Error...",
+              text: "Identificacion y/o contraseña incorrecta"
+            });
           }
         });
     },
-    ruta(){
-      window.location = "/create/user";
+    ruta() {
+      window.location = "/home";
     }
-
   }
 };
 </script>

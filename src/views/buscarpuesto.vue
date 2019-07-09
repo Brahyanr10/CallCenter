@@ -6,21 +6,6 @@
           <v-card-text>
             <h4>Listado Puestos De Votacion</h4>
             <br>
-
-            <v-text-field
-              name='dato'
-              v-model="dato"
-              :counter="20"
-              :rules="idRules"
-              label="dato a buscar"
-              required
-              outline
-              clearable
-            ></v-text-field>
-            <router-link  class="text-xs-center" :to="{ name: 'busquedapuesto',
-                                                        params: { dato:this.dato} }">
-              buscar
-            </router-link>
             <v-data-table
               :headers="headers"
               :items="puesto"
@@ -46,15 +31,14 @@
       </V-flex>
     </v-app>
   </div>
-
 </template>
 
 <script>
 export default {
   data () {
     return {
-      dato:"",
       puesto:[],
+      datos:this.$route.params.dato,
       headers: [
         {
           text: 'Id Puesto De Votacion',
@@ -74,11 +58,18 @@ export default {
   },
   methods:{
     listarpuestos(){
+      let config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      let params = new FormData();
+      params.append("datos", this.datos);
       axios
-        .post("http://localhost/api/api.php?action=listarpuestos")
+        .post("http://localhost/api/api.php?action=busquedapuesto", params, config)
         .then(res => {
           this.puesto = res.data.puesto;
-          console.log(this.puesto);
 
         });
     }

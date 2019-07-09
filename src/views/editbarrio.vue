@@ -33,9 +33,9 @@
               Validate
             </v-btn>
 
-            <v-btn color="error" @click="reset">
+            <!-- <v-btn color="error" @click="reset">
               Reset Form
-            </v-btn>
+            </v-btn> -->
           </v-form>
         </v-card-text>
       </v-card>
@@ -94,14 +94,18 @@ export default {
       params.append("idbarrio", this.idbarrio);
       params.append("nombre", this.nom_barrio);
       params.append("idcomuna", this.selected);
-
       axios
         .post("http://localhost/api/api.php?action=updatebarrio", params, config)
         .then(res => {
-
-
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Barrio actualizado con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.$router.push({ name: "listbarrio" });
         });
-
     },
     traercomunas() {
       axios
@@ -116,4 +120,7 @@ export default {
 </script>
 
 <style lang="css" scoped>
+.v-card__text {
+    margin-top: 50px;
+}
 </style>

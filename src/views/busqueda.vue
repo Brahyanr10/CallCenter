@@ -6,34 +6,8 @@
           <v-card-text>
             <h4>Listado Votantes</h4>
             <br>
-
-            <v-select
-              :items="items"
-              item-text="text"
-              v-model="selected"
-              item-value="id"
-              label="Buscar Por..."
-              bottom
-              autocomplete
-            ></v-select>
-
-            <v-text-field
-              name='dato'
-              v-model="dato"
-              :counter="20"
-              :rules="idRules"
-              label="dato a buscar"
-              required
-              outline
-              clearable
-            ></v-text-field>
-            <router-link  class="text-xs-center" :to="{ name: 'busqueda',
-                                                        params: {id:this.selected, dato:this.dato} }">
-              buscar
-            </router-link>
-
-            <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
-
+            <h1>{{datos}}</h1>
+            <h1>{{idbusqueda}}</h1>
             <v-data-table
               :headers="headers"
               :items="votantes"
@@ -73,19 +47,9 @@
 export default {
   data () {
     return {
-      selected: { id:" "},
+      idbusqueda:this.$route.params.id,
+      datos:this.$route.params.dato,
       votantes:[],
-      dato:"",
-      items:[
-        {id:1, text:"planilla"},
-        {id:2, text:"Lider o referido"},
-        {id:3, text:"Nombres"},
-        {id:4, text:"Apellidos"},
-        {id:5, text:"Barrio"},
-        {id:6, text:"E-mail"},
-        {id:7, text:"Puesto De Votacion"},
-
-      ],
       headers: [
         {
           text: '# Planilla',
@@ -104,25 +68,34 @@ export default {
         { text: 'Puesto De Votacion', value: '' },
         {text: 'Accion', value: '' }
       ]
-    };
+    }
   },
-created(){
-  this.listarvotantes();
-},
-  methods:{
-    listarvotantes(){
-      axios
-        .post("http://localhost/api/api.php?action=listarvotantes")
-        .then(res => {
-          this.votantes = res.data.votantes;
-          // console.log(this.puesto);
+  created(){
+    this.traerdatos();
+  },
 
+  methods:{
+    traerdatos(){
+      let config = {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "multipart/form-data"
+        }
+      };
+      let params = new FormData();
+      params.append("idbusqueda", this.idbusqueda);
+      params.append("datos", this.datos);
+      axios
+        .post("http://localhost/api/api.php?action=busqueda", params, config)
+        .then(res => {
+            this.votantes = res.data.votantes;
+            console.log(this.votantes);
         });
     }
   }
-
 }
 </script>
+
 
 <style lang="css" scoped>
 .v-card__text {

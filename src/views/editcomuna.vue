@@ -21,9 +21,9 @@
               Validate
             </v-btn>
 
-            <v-btn color="error" @click="reset">
+            <!-- <v-btn color="error" @click="reset">
               Reset Form
-            </v-btn>
+            </v-btn> -->
           </v-form>
         </v-card-text>
       </v-card>
@@ -74,6 +74,13 @@ export default {
       axios
         .post("http://localhost/api/api.php?action=updatecomuna", params, config)
         .then(res => {
+          Swal.fire({
+            position: 'top',
+            type: 'success',
+            title: 'Comuna actualizada con exito',
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.$router.push({ name: "listcomuna" });
 
         });
