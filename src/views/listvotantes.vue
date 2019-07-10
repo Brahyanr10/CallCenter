@@ -127,7 +127,7 @@ export default {
   methods: {
     listarvotantes() {
       axios
-        .post("http://localhost/api/api.php?action=listarvotantes")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarvotantes")
         .then(res => {
           this.votantes = res.data.votantes;
           // console.log(this.puesto);

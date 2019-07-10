@@ -25,7 +25,7 @@ export default {
       let params = new FormData();
       params.append("idpuesto", this.idpuesto);
       axios
-        .post("http://localhost/api/api.php?action=eliminarpuesto", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=eliminarpuesto", params, config)
         .then(res => {
           this.$router.push({ name: "listvotacion" });
         });

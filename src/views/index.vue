@@ -93,7 +93,7 @@ export default {
       params.append("identificacion", this.identificacion);
       params.append("password", this.password);
       axios
-        .post("http://localhost/api/api.php?action=login", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=login", params, config)
         .then(res => {
           this.usuario = res.data.usuario;
           if (
@@ -118,7 +118,7 @@ export default {
         });
     },
     ruta() {
-      window.location = "/home";
+      window.location = "/";
     }
   }
 };

@@ -82,7 +82,7 @@ export default {
   methods:{
     traerbarrios() {
       axios
-        .post("http://localhost/api/api.php?action=barrios")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=barrios")
         .then(res => {
           this.barrios = res.data.barrio;
           this.selected=this.barrios[0].idbarrio
@@ -102,7 +102,7 @@ export default {
       params.append("idbarrio", this.selected[0]);
       axios
         .post(
-          "http://localhost/api/api.php?action=buscarpuesto",
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarpuesto",
           params,
           config
         )
@@ -111,7 +111,7 @@ export default {
           if (this.puesto.length == 0) {
           axios
             .post(
-              "http://localhost/api/api.php?action=agregarpunto",
+              "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarpunto",
               params,
               config
             )

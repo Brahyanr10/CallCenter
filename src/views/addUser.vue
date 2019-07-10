@@ -176,7 +176,7 @@ export default {
       params.append("password", this.password);
       axios
         .post(
-          "http://localhost/api/api.php?action=buscaridenti",
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=buscaridenti",
           params,
           config
         )
@@ -185,7 +185,7 @@ export default {
           if (this.usuarios.length == 0) {
             axios
               .post(
-                "http://localhost/api/api.php?action=create",
+                "https://pruebas1994.000webhostapp.com/api/api.php?action=create",
                 params,
                 config
               )

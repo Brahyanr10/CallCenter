@@ -189,11 +189,11 @@ export default {
   },
   methods: {
     traerdatos() {
-      axios.post("http://localhost/api/api.php?action=barrios").then(res => {
+      axios.post("https://pruebas1994.000webhostapp.com/api/api.php?action=barrios").then(res => {
         this.barrios = res.data.barrio;
         this.selected1 = this.barrios[0].idbarrio;
       });
-      axios.post("http://localhost/api/api.php?action=puestos").then(res => {
+      axios.post("https://pruebas1994.000webhostapp.com/api/api.php?action=puestos").then(res => {
         this.puestos = res.data.puesto;
         this.selected2 = this.puestos[0].idpuesto_votacion;
         this.selected3=this.lider[0].value
@@ -219,7 +219,7 @@ export default {
       params.append("idpuesto", this.selected2);
       axios
         .post(
-          "http://localhost/api/api.php?action=buscarvotante",
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarvotante",
           params,
           config
         )
@@ -228,7 +228,7 @@ export default {
           if (this.votante.length == 0) {
             axios
               .post(
-                "http://localhost/api/api.php?action=agregarvotante",
+                "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarvotante",
                 params,
                 config
               )

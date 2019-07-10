@@ -86,7 +86,7 @@ export default {
   methods: {
     listarbarrio() {
       axios
-        .post("http://localhost/api/api.php?action=listarbarrio")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio")
         .then(res => {
           this.barrio = res.data.barrio;
           console.log(this.barrio);

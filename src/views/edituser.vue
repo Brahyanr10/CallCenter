@@ -159,7 +159,7 @@ export default {
       let params = new FormData();
       params.append("idusuario", this.idusuario);
       axios
-        .post("http://localhost/api/api.php?action=editusuario", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editusuario", params, config)
         .then(res => {
           this.usuario=res.data.usuarios;
           this.identificacion=this.usuario[0].identificacion;
@@ -186,7 +186,7 @@ export default {
       params.append("telefono", this.telefono);
       params.append("password", this.password);
       axios
-        .post("http://localhost/api/api.php?action=updateusuario", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updateusuario", params, config)
         .then(res => {
           Swal.fire({
             position: 'top',

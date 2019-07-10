@@ -67,7 +67,7 @@ export default {
       let params = new FormData();
       params.append("datos", this.datos);
       axios
-        .post("http://localhost/api/api.php?action=busquedabarrio", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=busquedabarrio", params, config)
         .then(res => {
             this.barrio = res.data.barrio;
             if (this.barrio.length == 0) {

@@ -55,7 +55,7 @@ export default {
   methods:{
     listarcomuna(){
       axios
-        .post("http://localhost/api/api.php?action=listarcomuna")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarcomuna")
         .then(res => {
           this.comuna = res.data.comuna;
 

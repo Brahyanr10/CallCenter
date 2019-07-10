@@ -60,7 +60,7 @@ export default {
       let params = new FormData();
       params.append("idcomuna", this.idcomuna);
       axios
-        .post("http://localhost/api/api.php?action=editcomuna", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editcomuna", params, config)
         .then(res => {
           this.comuna=res.data.comuna;
           this.num_comuna=this.comuna[0].nom_comuna;
@@ -77,7 +77,7 @@ export default {
       params.append("idcomuna", this.idcomuna);
       params.append("num_comuna", this.num_comuna);
       axios
-        .post("http://localhost/api/api.php?action=updatecomuna", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updatecomuna", params, config)
         .then(res => {
           Swal.fire({
             position: 'top',

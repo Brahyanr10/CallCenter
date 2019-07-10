@@ -34,8 +34,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'index',
-      component: Index
+      name: 'home',
+      component: Home
     },
     {
       path: '/busquedabarrio',
@@ -53,9 +53,9 @@ export default new Router({
       component: Busqueda
     },
     {
-      path: '/home',
-      name: 'home',
-      component: Home
+      path: '/iniciarsesion',
+      name: 'iniciarsesion',
+      component: Index
     },
     {
       path: '/create/user',

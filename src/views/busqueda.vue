@@ -86,7 +86,7 @@ export default {
       params.append("idbusqueda", this.idbusqueda);
       params.append("datos", this.datos);
       axios
-        .post("http://localhost/api/api.php?action=busqueda", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=busqueda", params, config)
         .then(res => {
             this.votantes = res.data.votantes;
             if (this.votantes.length == 0) {

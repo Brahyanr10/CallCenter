@@ -87,7 +87,7 @@ export default {
   methods: {
     listarpuestos() {
       axios
-        .post("http://localhost/api/api.php?action=listarpuestos")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarpuestos")
         .then(res => {
           this.puesto = res.data.puesto;
           console.log(this.puesto);

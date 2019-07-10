@@ -78,14 +78,14 @@ export default {
       let params = new FormData();
       params.append("idbarrio", this.idbarrio);
       axios
-        .post("http://localhost/api/api.php?action=listarcomuna")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarcomuna")
         .then(res => {
           this.comunas = res.data.comuna;
           console.log(this.comunas);
         });
 
       axios
-        .post("http://localhost/api/api.php?action=editbarrio", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editbarrio", params, config)
         .then(res => {
           this.barrio=res.data.barrio;
           this.nom_barrio=this.barrio[0].nom_barrio;
@@ -105,7 +105,7 @@ export default {
       params.append("nombre", this.nom_barrio);
       params.append("idcomuna", this.selected);
       axios
-        .post("http://localhost/api/api.php?action=updatebarrio", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updatebarrio", params, config)
         .then(res => {
           Swal.fire({
             position: 'top',
@@ -119,7 +119,7 @@ export default {
     },
     traercomunas() {
       axios
-        .post("http://localhost/api/api.php?action=listarcomuna")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarcomuna")
         .then(res => {
           this.comunas = res.data.comuna;
           console.log(this.comunas);

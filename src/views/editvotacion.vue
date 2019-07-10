@@ -87,13 +87,13 @@ export default {
       let params = new FormData();
       params.append("idpuesto", this.idpuesto);
       axios
-        .post("http://localhost/api/api.php?action=listarbarrio")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio")
         .then(res => {
           this.barrios = res.data.barrio;
           console.log(this.comunas);
         });
         axios
-          .post("http://localhost/api/api.php?action=editpuesto", params, config)
+          .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editpuesto", params, config)
           .then(res => {
             this.puesto=res.data.puesto;
             this.punto_votacion=this.puesto[0].nombre;
@@ -114,7 +114,7 @@ export default {
       params.append("direccion", this.direccion);
       params.append("idbarrio", this.selected);
       axios
-        .post("http://localhost/api/api.php?action=updatepuesto", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updatepuesto", params, config)
         .then(res => {
           Swal.fire({
             position: 'top',

@@ -61,7 +61,7 @@ export default {
   methods: {
     listarusuarios(){
       axios
-        .post("http://localhost/api/api.php?action=listarusuarios")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarusuarios")
         .then(res => {
           this.users = res.data.usuarios;
 

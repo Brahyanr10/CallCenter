@@ -67,7 +67,7 @@ export default {
       let params = new FormData();
       params.append("datos", this.datos);
       axios
-        .post("http://localhost/api/api.php?action=busquedapuesto", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=busquedapuesto", params, config)
         .then(res => {
           this.puesto = res.data.puesto;
           if (this.puesto.length == 0) {

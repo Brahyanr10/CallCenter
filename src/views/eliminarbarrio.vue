@@ -23,7 +23,7 @@ export default {
       let params = new FormData();
       params.append("idbarrio", this.idbarrio);
       axios
-        .post("http://localhost/api/api.php?action=eliminarbarrio", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=eliminarbarrio", params, config)
         .then(res => {
           this.$router.push({ name: "listbarrio" });
         });

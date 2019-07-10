@@ -23,7 +23,7 @@ export default {
       let params = new FormData();
       params.append("idusuario", this.idusuario);
       axios
-        .post("http://localhost/api/api.php?action=eliminarusuario", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=eliminarusuario", params, config)
         .then(res => {
           this.$router.push({ name: "listusers" });
         });

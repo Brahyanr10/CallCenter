@@ -193,18 +193,18 @@ export default {
       params.append("idvotante", this.idvotante);
 
       axios
-        .post("http://localhost/api/api.php?action=barrios")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=barrios")
         .then(res => {
           this.barrios = res.data.barrio;
         });
         axios
-          .post("http://localhost/api/api.php?action=puestos")
+          .post("https://pruebas1994.000webhostapp.com/api/api.php?action=puestos")
           .then(res => {
             this.puestos = res.data.puesto;
 
           });
           axios
-            .post("http://localhost/api/api.php?action=editvotante", params, config)
+            .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editvotante", params, config)
             .then(res => {
               this.datos=res.data.datos;
               this.planilla=this.datos[0].num_planilla;
@@ -241,7 +241,7 @@ export default {
       params.append("email", this.email);
       params.append("idpuesto", this.selected2);
       axios
-        .post("http://localhost/api/api.php?action=updatevotantes", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updatevotantes", params, config)
         .then(res => {
           Swal.fire({
             position: 'top',

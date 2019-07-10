@@ -76,12 +76,12 @@ methods:{
       let params = new FormData();
       params.append("comuna", this.comuna);
       axios
-        .post("http://localhost/api/api.php?action=buscarcomuna", params, config)
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=buscarcomuna", params, config)
         .then(res => {
           this.comunas=res.data.comuna;
           if (this.comunas.length == 0) {
           axios
-            .post("http://localhost/api/api.php?action=agregarcomuna", params, config)
+            .post("https://pruebas1994.000webhostapp.com/api/api.php?action=agregarcomuna", params, config)
             .then(res => {
               this.reset();
               Swal.fire({

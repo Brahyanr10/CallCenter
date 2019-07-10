@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <b-navbar toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand :to="{ name: 'index' }">
+      <b-navbar-brand :to="{ name: 'home' }">
         CallCenter
       </b-navbar-brand>
 
@@ -50,6 +50,7 @@
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <v-btn
+            @click="iniciarsesion()"
             outline
             color="#009688"
             :to="{ name: 'index' }"
@@ -142,7 +143,7 @@ export default {
         // params.append("password", this.password);
         axios
           .post(
-            "http://localhost/api/api.php?action=buscaruser",
+            "https://pruebas1994.000webhostapp.com/api/api.php?action=buscaruser",
             params,
             config
           )
@@ -164,6 +165,9 @@ export default {
       alert("adios");
       // location.reload(true);
       window.location = "/";
+    },
+    iniciarsesion(){
+      this.$router.push({ name: "iniciarsesion" });
     }
   }
 };

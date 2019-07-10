@@ -78,7 +78,7 @@ export default {
       params.append("comuna", this.selected);
       axios
         .post(
-          "http://localhost/api/api.php?action=buscarbarrio",
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarbarrio",
           params,
           config
         )
@@ -87,7 +87,7 @@ export default {
           if (this.barrio.length == 0) {
             axios
               .post(
-                "http://localhost/api/api.php?action=agregarbarrio",
+                "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarbarrio",
                 params,
                 config
               )
@@ -114,7 +114,7 @@ export default {
     },
     traercomunas() {
       axios
-        .post("http://localhost/api/api.php?action=comunas")
+        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=comunas")
         .then(res => {
           this.comunas = res.data.comuna;
           this.selected=this.comunas[0].idcomuna
