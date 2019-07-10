@@ -75,7 +75,7 @@
 
               <v-btn
                 color="success"
-                @click="updateusuario"
+                @click="validate"
                 class="btn-Green btn--md"
               >
                 Editar Usuario
@@ -135,9 +135,9 @@ export default {
        // ],
        passwordRules: [
          password => !!password || "Contraseña es requerido",
-         password =>
-           (password && password.length <= 8) ||
-           "La contraseña no puede superar los 8 caracteres"
+         // password =>
+         //   (password && password.length <= 8) ||
+         //   "La contraseña no puede superar los 8 caracteres"
        ],
        select: null,
        items: ["1", "2"]
@@ -149,6 +149,13 @@ export default {
   },
 
   methods:{
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        this.updateusuario();
+      } else {
+      }
+    },
     traerusuarios(){
       let config = {
         headers: {

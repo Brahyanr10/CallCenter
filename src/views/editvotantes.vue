@@ -15,8 +15,7 @@
             <v-text-field
               name="planilla"
               v-model="planilla"
-              :counter="10"
-              :rules="idRules"
+              :rules="[plan => !!plan || 'Planilla es requerido']"
               label="Numero Planilla"
               required
               outline
@@ -27,27 +26,20 @@
               :items="lider"
               item-text="text"
               v-model="selected3"
+              :rules="[puesVot => !!puesVot || 'Puesto de votación es requerido']"
               item-value="value"
-              label="Seleccione el puesto de votacion"
+              label="Seleccione el puesto de votación"
               bottom
               autocomplete
-            ></v-select>
-
-            <!-- <v-text-field
-              name="lider_referido"
-              v-model="lider_referido"
-              :rules="nameRules"
-              label="Lider o referido"
-              required
               outline
               clearable
-            ></v-text-field> -->
+            ></v-select>
 
             <v-text-field
               name="nombres"
               v-model="nombres"
-              :rules="lastnameRules"
-              label="Nombres"
+              :rules="[name => !!name || 'Nombre es requerido']"
+              label="Nombre"
               required
               outline
               clearable
@@ -56,8 +48,8 @@
             <v-text-field
               name="apellidos"
               v-model="apellidos"
-              :rules="emailRules"
-              label="Apellidos"
+              :rules="[lastname => !!lastname || 'Apellido es requerido']"
+              label="Apellido"
               required
               outline
               clearable
@@ -77,8 +69,9 @@
             <v-text-field
               name="celular"
               v-model="celular"
-              :rules="phoneRules"
+              :rules="[phone => !!phone || 'Telefono es requerido']"
               label="Telefono"
+              required
               outline
               clearable
             ></v-text-field>
@@ -87,7 +80,7 @@
               name="direccion"
               v-model="direccion"
               :counter="30"
-              :rules="passwordRules"
+              :rules="direccionRules"
               label="Direccion"
               required
               outline
@@ -102,6 +95,8 @@
               label="Seleccione El barrio"
               bottom
               autocomplete
+              outline
+              clearable
             ></v-select>
 
             <v-text-field
@@ -123,6 +118,8 @@
               label="Seleccione el puesto de votacion"
               bottom
               autocomplete
+              outline
+              clearable
             ></v-select>
 
             <!-- <div class="mt-3">Selected: <strong>{{ selected1}}</strong></div>
@@ -130,7 +127,7 @@
 
             <v-btn
               color="success"
-              @click="updatevotantes"
+              @click="validate"
               class="btn-Green btn--md"
             >
               Editar Votante
@@ -173,15 +170,28 @@ export default {
 
       ],
       idRules: [
-        id => !!id || "Numero de Comuna es requerido",
-        id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
-      ]
+        id => !!id || "Numero de identificación es requerido",
+        id => (id && id.length <= 10) || "No puede superar los 10 caracteres"
+      ],
+      direccionRules: [
+         dirr => !!dirr || "Dirección es requerido",
+         dirr =>
+           (dirr && dirr.length <= 60) ||
+           "No puede superar los 60 caracteres"
+       ],
     };
   },
   created(){
     this.traerdatos();
   },
   methods:{
+    validate() {
+  if (this.$refs.form.validate()) {
+    // this.snackbar = true;
+    this.updatevotantes();
+  } else {
+  }
+},
     traerdatos(){
       let config = {
         headers: {

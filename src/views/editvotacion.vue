@@ -1,58 +1,59 @@
-<template >
+<template>
   <v-layout>
     <v-flex xs4 sm4 offset-sm4>
       <v-card>
         <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation >
+          <v-form ref="form" v-model="valid" lazy-validation>
             <div class="LoginDivider">
               <span class="LoginDivider-text">
-                <span>Editar Puesto De votacion</span>
+                <span>Editar puesto de votación</span>
               </span>
-              <br>
-              <br>
-            <v-text-field
-              name='punto_votacion'
-              v-model="punto_votacion"
-              :counter="60"
-              :rules="idRules"
-              label="Nombre Barrio"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <br />
+              <br />
+              <v-text-field
+                name="punto_votacion"
+                v-model="punto_votacion"
+                :counter="60"
+                :rules="puntoVRules"
+                label="Nombre Barrio"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name='direccion'
-              v-model="direccion"
-              :counter="60"
-              :rules="idRules"
-              label="Direccion"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-text-field
+                name="direccion"
+                v-model="direccion"
+                :counter="60"
+                :rules="direccionRules"
+                label="Direccion"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-select
-              :items="barrios"
-              item-text="nom_barrio"
-              v-model="selected"
-              item-value="idbarrio"
-              label="Seleccione Un Barrio"
-              bottom
-              autocomplete
-            ></v-select>
+              <v-select
+                :items="barrios"
+                item-text="nom_barrio"
+                v-model="selected"
+                item-value="idbarrio"
+                label="Seleccione Un Barrio"
+                bottom
+                autocomplete
+                outline
+                clearable
+              ></v-select>
 
-            <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+              <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
 
-            <v-btn
-              color="success"
-              @click="updatepuesto"
-              class="btn-Green btn--md"
-            >
-              Editar Puesto De Votacion
-            </v-btn>
-
-          </div>
+              <v-btn
+                color="success"
+                @click="validate"
+                class="btn-Green btn--md"
+              >
+                Editar Puesto De Votacion
+              </v-btn>
+            </div>
           </v-form>
         </v-card-text>
       </v-card>
@@ -65,19 +66,39 @@ export default {
   data() {
     return {
       selected: { idbarrio: "" },
-      punto_votacion:"",
-      direccion:" ",
+      punto_votacion: "",
+      direccion: " ",
       idpuesto: this.$route.params.id,
-      barrios:[],
-      puesto:[],
+      barrios: [],
+      puesto: [],
+
+      puntoVRules: [
+         puesV => !!puesV || "Nombre de barrio es requerido",
+         puesV =>
+           (puesV && puesV.length <= 60) ||
+           "No puede superar los 60 caracteres"
+       ],
+       direccionRules: [
+          dirr => !!dirr || "Dirección es requerido",
+          dirr =>
+            (dirr && dirr.length <= 60) ||
+            "No puede superar los 60 caracteres"
+        ],
     };
   },
-  created(){
+  created() {
     this.traerpuesto();
   },
 
-  methods:{
-    traerpuesto(){
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        this.updatepuesto();
+      } else {
+      }
+    },
+    traerpuesto() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -87,21 +108,27 @@ export default {
       let params = new FormData();
       params.append("idpuesto", this.idpuesto);
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio")
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio"
+        )
         .then(res => {
           this.barrios = res.data.barrio;
           console.log(this.comunas);
         });
-        axios
-          .post("https://pruebas1994.000webhostapp.com/api/api.php?action=editpuesto", params, config)
-          .then(res => {
-            this.puesto=res.data.puesto;
-            this.punto_votacion=this.puesto[0].nombre;
-            this.direccion=this.puesto[0].direccion
-            this.selected=this.puesto[0].idbarrio
-          });
+      axios
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=editpuesto",
+          params,
+          config
+        )
+        .then(res => {
+          this.puesto = res.data.puesto;
+          this.punto_votacion = this.puesto[0].nombre;
+          this.direccion = this.puesto[0].direccion;
+          this.selected = this.puesto[0].idbarrio;
+        });
     },
-    updatepuesto(){
+    updatepuesto() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -114,21 +141,24 @@ export default {
       params.append("direccion", this.direccion);
       params.append("idbarrio", this.selected);
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=updatepuesto", params, config)
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=updatepuesto",
+          params,
+          config
+        )
         .then(res => {
           Swal.fire({
-            position: 'top',
-            type: 'success',
-            title: 'Usuario actualizado con exito',
+            position: "top",
+            type: "success",
+            title: "Usuario actualizado con exito",
             showConfirmButton: false,
             timer: 1500
-          })
+          });
           this.$router.push({ name: "listvotacion" });
-
         });
     }
   }
-}
+};
 </script>
 
 <style lang="css" scoped>

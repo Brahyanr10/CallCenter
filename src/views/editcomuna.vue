@@ -14,8 +14,8 @@
               name='num_comuna'
               v-model="num_comuna"
               :counter="10"
-              :rules="idRules"
-              label="Identificación"
+              :rules="comunaRules"
+              label="Numero de Comuna"
               required
               outline
               clearable
@@ -23,7 +23,7 @@
 
             <v-btn
               color="success"
-              @click="updatecomuna"
+              @click="validate"
               class="btn-Green btn--md"
             >
               Editar Comuna
@@ -43,13 +43,28 @@ export default {
     return {
       num_comuna:"",
       idcomuna: this.$route.params.id,
-      comuna:[]
+      comuna:[],
+
+      comunaRules: [
+         comun => !!comun || "Comuna es requerido",
+         comun =>
+           (comun && comun.length <= 10) ||
+           "No puede superar los 10 caracteres"
+       ],
     };
   },
   created(){
     this.traercomuna();
   },
+
   methods:{
+    validate() {
+  if (this.$refs.form.validate()) {
+    // this.snackbar = true;
+    this.updatecomuna();
+  } else {
+  }
+},
     traercomuna(){
       let config = {
         headers: {
