@@ -62,7 +62,7 @@
           <template slot="button-content" class="glyphicon glyphicon-user"
             ><span id="navItems">{{ usuario[0].nombre }}</span>
           </template>
-          <b-dropdown-item @click="perfil()">Profile</b-dropdown-item>
+          <b-dropdown-item :to="{name:'cambiocontra'}">Cambiar Contraseña</b-dropdown-item>
           <b-dropdown-item @click="cerrarsesion()"
             >Cerrar Sesion</b-dropdown-item
           >
