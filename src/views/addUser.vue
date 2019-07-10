@@ -71,19 +71,9 @@
                   clearable
                 ></v-text-field>
 
-                <!-- <v-select
-                nome="tipo_usuario"
-                v-model="select"
-                :items="items"
-                :rules="[v => !!v || 'Item es requerido']"
-                label="Item"
-                required
-                outline
-              ></v-select> -->
-
                 <v-btn
                   color="success"
-                  @click="agregarusuario"
+                  @click="validate"
                   class="btn-Green btn--md"
                 >
                   Registrar Usuario
@@ -154,7 +144,9 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
-        // this.agregarusuario();
+        this.agregarusuario();
+      }
+      else{
       }
     },
     reset() {
@@ -356,5 +348,4 @@ export default {
 .error {
     margin-left: 0px;
 }
-
 </style>

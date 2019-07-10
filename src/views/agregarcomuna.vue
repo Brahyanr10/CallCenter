@@ -22,10 +22,9 @@
               clearable
             ></v-text-field>
 
-
             <v-btn
               color="success"
-              @click="agregarcomuna"
+              @click="validate"
               class="btn-Green btn--md"
             >
               Registrar Comuna
@@ -60,7 +59,9 @@ export default {
 methods:{
   validate() {
     if (this.$refs.form.validate()) {
-
+      this.agregarcomuna();
+    }
+    else{
     }
   },
   reset() {

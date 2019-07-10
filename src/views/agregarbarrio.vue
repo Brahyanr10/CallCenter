@@ -14,7 +14,7 @@
               name="barrio"
               v-model="barrio"
               :counter="20"
-              :rules="idRules"
+              :rules="barrioRules"
               label="Nombre Del Barrio"
               required
               outline
@@ -24,17 +24,19 @@
             <v-select
               :items="comunas"
               item-text="nom_comuna"
-              v-model="selected"
-              item-value="idcomuna"
+              v-model="select"
               label="Seleccione una comuna"
+              required
               bottom
               autocomplete
+              outline
+              clearable
             ></v-select>
             <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
 
             <v-btn
               color="success"
-              @click="agregarbarrio"
+              @click="validate"
               class="btn-Green btn--md"
             >
               Registrar Barrio
@@ -50,21 +52,26 @@
 <script>
 export default {
   data: () => ({
-    selected: { idcomuna:" " },
+    selected: { idcomuna:"" },
     comunas: [],
     barrio: "",
     verificacion: 0,
-    idRules: [
-      id => !!id || "Numero de Comuna es requerido",
-      id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
+    barrioRules: [
+      barr => !!barr || "Barrio es requerido",
+      barr => (barr && barr.length <= 20) || "No puede superar los 20 caracteres"
     ]
   }),
   created() {
     this.traercomunas();
   },
   methods: {
-    reset() {
-      this.$refs.form.reset();
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        this.agregarbarrio();
+      }
+      else{
+      }
     },
     agregarbarrio() {
       let config = {

@@ -5,125 +5,121 @@
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
             <div class="LoginDivider">
-            <span class="LoginDivider-text">
-              <span>Registrar Puesto De Votacion</span>
-            </span>
-            <br>
-            <br>
-            <v-text-field
-              name="planilla"
-              v-model="planilla"
-              :counter="10"
-              :rules="idRules"
-              label="Numero Planilla"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <span class="LoginDivider-text">
+                <span>Registrar Puesto De Votacion</span>
+              </span>
+              <br />
+              <br />
+              <v-text-field
+                name="planilla"
+                v-model="planilla"
+                :counter="10"
+                :rules="numPlaRules"
+                label="Numero Planilla"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-select
-              :items="lider"
-              item-text="text"
-              v-model="selected3"
-              item-value="value"
-              label="Seleccione el tipo de persona"
-              bottom
-              autocomplete
-            ></v-select>
+              <v-select
+                :items="lider"
+                item-text="text"
+                v-model="selecte"
+                :rules="[ldr => !!ldr || 'Tipo de persona es requerido']"
+                item-value="value"
+                label="Seleccione el tipo de persona"
+                bottom
+                autocomplete
+                outline
+                clearable
+              ></v-select>
 
-            <!-- <v-text-field
-              name="lider_referido"
-              v-model="lider_referido"
-              :rules="nameRules"
-              label="Lider o referido"
-              required
-              outline
-              clearable
-            ></v-text-field> -->
+              <v-text-field
+                name="nombres"
+                v-model="nombres"
+                :rules="[nam => !!nam || 'Nombre es requerido']"
+                label="Nombres"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="nombres"
-              v-model="nombres"
-              :rules="lastnameRules"
-              label="Nombres"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-text-field
+                name="apellidos"
+                v-model="apellidos"
+                :rules="[apell => !!apell || 'Apellido es requerido']"
+                label="Apellidos"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="apellidos"
-              v-model="apellidos"
-              :rules="emailRules"
-              label="Apellidos"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-text-field
+                name="identificacion"
+                v-model="identificacion"
+                :counter="10"
+                :rules="identificacionRules "
+                label="Numero de Identificacion"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="identificacion"
-              v-model="identificacion"
-              :counter="10"
-              :rules="idRules"
-              label="Numero de Identificacion"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-text-field
+                name="celular"
+                v-model="celular"
+                :rules="[tel => !!tel || 'Telefono es requerido']"
+                label="Telefono"
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="celular"
-              v-model="celular"
-              :rules="phoneRules"
-              label="Telefono"
-              outline
-              clearable
-            ></v-text-field>
+              <v-text-field
+                name="direccion"
+                v-model="direccion"
+                :counter="30"
+                :rules="direccionRules"
+                label="Direccion"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="direccion"
-              v-model="direccion"
-              :counter="30"
-              :rules="passwordRules"
-              label="Direccion"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-select
+                :items="barrios"
+                item-text="nom_barrio"
+                v-model="select"
+                item-value="idbarrio"
+                label="Seleccione El barrio"
+                bottom
+                autocomplete
+                outline
+                clearable
+              ></v-select>
 
-            <v-select
-              :items="barrios"
-              item-text="nom_barrio"
-              v-model="selected1"
-              item-value="idbarrio"
-              label="Seleccione El barrio"
-              bottom
-              autocomplete
-            ></v-select>
+              <v-text-field
+                name="email"
+                v-model="email"
+                :counter="30"
+                label="E-mail"
+                required
+                outline
+                clearable
+              ></v-text-field>
 
-            <v-text-field
-              name="email"
-              v-model="email"
-              :counter="30"
-              :rules="passwordRules"
-              label="E-mail"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <v-select
+                :items="puestos"
+                item-text="nombre"
+                v-model="select"
+                item-value="idpuesto_votacion"
+                label="Seleccione el puesto de votacion"
+                bottom
+                autocomplete
+                outline
+                clearable
+              ></v-select>
 
-            <v-select
-              :items="puestos"
-              item-text="nombre"
-              v-model="selected2"
-              item-value="idpuesto_votacion"
-              label="Seleccione el puesto de votacion"
-              bottom
-              autocomplete
-            ></v-select>
-
-            <!-- <div class="mt-3">
+              <!-- <div class="mt-3">
               Selected: <strong>{{ selected1 }}</strong>
             </div>
             <div class="mt-3">
@@ -133,19 +129,18 @@
               Selected: <strong>{{ selected3 }}</strong>
             </div> -->
 
+              <v-btn
+                color="success"
+                @click="validate"
+                class="btn-Green btn--md"
+              >
+                Registrar
+              </v-btn>
 
-            <v-btn
-              color="success"
-              @click="agregarvotante"
-              class="btn-Green btn--md"
-            >
-              Registrar
-            </v-btn>
-
-            <v-btn color="error" @click="reset" class="btn-Red btn--md">
-              Resetear formulario
-            </v-btn>
-          </div>
+              <v-btn color="error" @click="reset" class="btn-Red btn--md">
+                Resetear formulario
+              </v-btn>
+            </div>
           </v-form>
         </v-card-text>
       </v-card>
@@ -156,48 +151,75 @@
 <script>
 export default {
   data: () => ({
-    selected1: { idbarrio: " " },
-    selected2: { idpuesto_votacion: " " },
-    selected3: { value: " " },
-    planilla: " ",
-    lider_referido: " ",
-    nombres: " ",
-    apellidos: " ",
-    identificacion: " ",
-    celular: " ",
-    direccion: " ",
+    selected1: { idbarrio: "" },
+    selected2: { idpuesto_votacion: "" },
+    selected3: { value: "" },
+    planilla: "",
+    lider_referido: "",
+    nombres: "",
+    apellidos: "",
+    identificacion: "",
+    celular: "",
+    direccion: "",
     barrios: [],
-    email: " ",
+    email: "",
     puesto: [],
     votante: [],
-    lider:[
-      {value:"", text:""},
-      {value:"Lider", text:"Lider"},
-      {value:"Referido", text:"Referido"},
-      {value:"Coordinador", text:"Coordinador"},
-      {value:"Otro", text:"Otro"},
-
+    lider: [
+      { value: "", text: "" },
+      { value: "Lider", text: "Lider" },
+      { value: "Referido", text: "Referido" },
+      { value: "Coordinador", text: "Coordinador" },
+      { value: "Otro", text: "Otro" }
     ],
 
-    idRules: [
+    numPlaRules: [
+      numPla => !!numPla || "Numero de planilla es requerido",
+      numPla =>
+        (numPla && numPla.length <= 10) || "No puede superar los 10 caracteres"
+    ],
+    tipoPerRules: [
       id => !!id || "Numero de Comuna es requerido",
       id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
+    ],
+    identificacionRules: [
+      ident => !!ident || "Identificación es requerido",
+      ident => (ident && ident.length <= 10) || "No puede superar los 10 caracteres"
+    ],
+    direccionRules: [
+      direcc => !!direcc || "Dirección es requerido",
+      direcc => (direcc && direcc.length <= 30) || "No puede superar los 30 caracteres"
     ]
   }),
   created() {
     this.traerdatos();
   },
   methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        this.agregarvotante();
+      } else {
+      }
+    },
     traerdatos() {
-      axios.post("https://pruebas1994.000webhostapp.com/api/api.php?action=barrios").then(res => {
-        this.barrios = res.data.barrio;
-        this.selected1 = this.barrios[0].idbarrio;
-      });
-      axios.post("https://pruebas1994.000webhostapp.com/api/api.php?action=puestos").then(res => {
-        this.puestos = res.data.puesto;
-        this.selected2 = this.puestos[0].idpuesto_votacion;
-        this.selected3=this.lider[0].value
-      });
+      axios
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=barrios"
+        )
+        .then(res => {
+          this.barrios = res.data.barrio;
+          this.selected1 = this.barrios[0].idbarrio;
+        });
+      axios
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=puestos"
+        )
+        .then(res => {
+          this.puestos = res.data.puesto;
+          this.selected2 = this.puestos[0].idpuesto_votacion;
+          this.selected3 = this.lider[0].value;
+        });
     },
     agregarvotante() {
       let config = {
@@ -240,21 +262,20 @@ export default {
                   showConfirmButton: false,
                   timer: 1500
                 });
-                  this.reset();
+                this.reset();
               });
-          }else {
+          } else {
             Swal.fire({
-              type: 'error',
-              title: 'Error...',
-              text: 'La identificacion ya esta registrada',
-
-              })
+              type: "error",
+              title: "Error...",
+              text: "La identificacion ya esta registrada"
+            });
           }
         });
     },
     reset() {
       this.$refs.form.reset();
-    },
+    }
   }
 };
 </script>

@@ -15,7 +15,7 @@
               name='punto_votacion'
               v-model="punto_votacion"
               :counter="60"
-              :rules="idRules"
+              :rules="puntoVRules"
               label="Punto de Votacion"
               required
               outline
@@ -26,7 +26,7 @@
               name='direccion'
               v-model="direccion"
               :counter="60"
-              :rules="idRules"
+              :rules="direccionRules"
               label="Direccion"
               required
               outline
@@ -36,17 +36,19 @@
             <v-select
               :items="barrios"
               item-text="nom_barrio"
-              v-model="selected"
+              v-model="select"
               item-value="idbarrio"
               label="Seleccione El barrio"
               bottom
               autocomplete
+              outline
+              clearable
             ></v-select>
 
 
             <v-btn
               color="success"
-              @click="agregarpunto"
+              @click="validate"
               class="btn-Green btn--md"
             >
               Registrar Puesto De Votacion
@@ -66,19 +68,24 @@
 export default {
 
   data: () => ({
-    selected: { idbarrio: " " },
+    selected: { idbarrio: "" },
     barrios: [],
     puesto:[],
-    punto_votacion:" ",
-    direccion:" ",
-    idRules: [
-      id => !!id || "Numero de Comuna es requerido",
-      id => (id && id.length <= 20) || "no puede superar los 10 caracteres"
+    punto_votacion:"",
+    direccion:"",
+    puntoVRules: [
+      puntV => !!puntV || "Puesto de votación es requerido",
+      puntV => (puntV && puntV.length <= 60) || "No puede superar los 60 caracteres"
+    ],
+    direccionRules: [
+      direcc => !!direcc || "Dirección es requerido",
+      direcc => (direcc && direcc.length <= 60) || "No puede superar los 60 caracteres"
     ]
   }),
   created(){
     this.traerbarrios();
   },
+
   methods:{
     traerbarrios() {
       axios
@@ -88,6 +95,14 @@ export default {
           this.selected=this.barrios[0].idbarrio
           console.log(this.barrios);
         });
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        this.agregarpunto();
+      }
+      else{
+      }
     },
     agregarpunto(){
       let config = {
