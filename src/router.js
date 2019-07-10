@@ -25,6 +25,7 @@ import Home from './views/home.vue'
 import Busqueda from './views/busqueda.vue'
 import Busquedabarrio from './views/buscarbarrio.vue'
 import Busquepuesto from './views/buscarpuesto.vue'
+import Cambiocontra from './views/cambiocontra.vue'
 
 Vue.use(Router)
 
@@ -36,6 +37,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/cambio/contraseña',
+      name: 'cambiocontra',
+      component: Cambiocontra
     },
     {
       path: '/busquedabarrio',
