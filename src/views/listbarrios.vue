@@ -6,29 +6,34 @@
           <v-card-text>
             <h4>Listado De Barrios</h4>
             <br />
-            <div class="search">
-              <div class="infor">
-                <v-text-field
-                  name="dato"
-                  v-model="dato"
-                  :counter="20"
-                  :rules="idRules"
-                  label="Barrio a buscar"
-                  required
-                  outline
-                  clearable
-                ></v-text-field>
-                <router-link
-                  class="text-xs-center"
-                  :to="{ name: 'busquedabarrio', params: { dato: this.dato } }"
-                >
-                  <v-btn color="info" @click="validate">
-                    Buscar
-                    <v-icon>search</v-icon>
-                  </v-btn>
-                </router-link>
+            <v-form ref="form" v-model="valid" lazy-validation>
+              <div class="search">
+                <div class="infor">
+                  <v-text-field
+                    name="dato"
+                    v-model="dato"
+                    :counter="20"
+                    :rules="[searc => !!searc || 'Digite el dato a buscar']"
+                    label="Barrio a buscar"
+                    required
+                    outline
+                    clearable
+                  ></v-text-field>
+                  <!-- <router-link
+                    class="text-xs-center"
+                    :to="{
+                      name: 'busquedabarrio',
+                      params: { dato: this.dato }
+                    }"
+                  > -->
+                    <v-btn color="info" @click="validate">
+                      Buscar
+                      <v-icon>search</v-icon>
+                    </v-btn>
+                  <!-- </router-link> -->
+                </div>
               </div>
-            </div>
+            </v-form>
 
             <v-data-table
               :headers="headers"
@@ -104,6 +109,13 @@ export default {
     this.listarbarrio();
   },
   methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        // this.snackbar = true;
+        // aca va el llamado del metodo
+      } else {
+      }
+    },
     listarbarrio() {
       axios
         .post(
