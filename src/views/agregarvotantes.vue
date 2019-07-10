@@ -420,4 +420,7 @@ export default {
 .error {
     margin-left: 0px;
 }
+.v-card__text {
+    margin-bottom: 50px;
+}
 </style>
