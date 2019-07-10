@@ -23,7 +23,7 @@
                 <v-text-field
                   name="password"
                   v-model="password"
-                  :counter="8"
+                  :counter="20"
                   :rules="passwordRules"
                   :type="'password'"
                   label="Tu Contraseña"
@@ -67,7 +67,7 @@ export default {
     passwordRules: [
       psw => !!psw || "Contraseña es requerida",
       psw =>
-        (psw && psw.length <= 8) ||
+        (psw && psw.length <= 20) ||
         "La contraseña no puede superar los 8 caracteres"
     ]
   }),
