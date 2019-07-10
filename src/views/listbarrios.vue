@@ -6,20 +6,22 @@
           <v-card-text>
             <h4>Listado De  Barrios</h4>
             <br>
-            <v-text-field
-              name='dato'
-              v-model="dato"
-              :counter="20"
-              :rules="idRules"
-              label="Barrio a buscar"
-              required
-              outline
-              clearable
-            ></v-text-field>
-            <router-link  class="text-xs-center" :to="{ name: 'busquedabarrio',
-                                                        params: {dato:this.dato} }">
-              buscar
-            </router-link>
+            <div class="search">
+              <v-text-field
+                name='dato'
+                v-model="dato"
+                :counter="20"
+                :rules="idRules"
+                label="Barrio a buscar"
+                required
+                outline
+                clearable
+              ></v-text-field>
+              <router-link  class="text-xs-center" :to="{ name: 'busquedabarrio',
+                                                          params: {dato:this.dato} }">
+                <v-btn color="info">Buscar</v-btn>
+              </router-link>            </div>
+
             <v-data-table
               :headers="headers"
               :items="barrio"
@@ -86,5 +88,8 @@ export default {
 <style lang="css" scoped>
 .v-card__text {
     margin-top: 50px;
+}
+.search {
+    display: flex;
 }
 </style>
