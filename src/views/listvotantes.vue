@@ -155,9 +155,12 @@ export default {
     validate() {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
-        this.busqueda();
+        this.buscar();
       } else {
       }
+    },
+    buscar(){
+      this.$router.push({ name: "busqueda", params: {  id: this.selected, dato: this.dato }});
     },
     listarvotantes() {
       axios

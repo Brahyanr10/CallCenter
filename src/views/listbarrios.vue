@@ -113,8 +113,12 @@ export default {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
         // aca va el llamado del metodo
+        this.buscar();
       } else {
       }
+    },
+    buscar(){
+      this.$router.push({ name: "busquedabarrio", params: { dato: this.dato }});
     },
     listarbarrio() {
       axios

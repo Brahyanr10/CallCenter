@@ -112,9 +112,14 @@ export default {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
         // aca pone el meotodo de busqueda
+        this.buscar();
       } else {
       }
     },
+    buscar(){
+      this.$router.push({ name: "busquedapuesto", params: { dato: this.dato }});
+    },
+
     listarpuestos() {
       axios
         .post(
