@@ -1,14 +1,14 @@
-<template >
-  <div >
-    <v-app >
+<template>
+  <div>
+    <v-app>
       <v-flex xs12 sm8 offset-sm2>
         <v-card>
           <v-card-text>
-            <h4>Listado De  Barrios</h4>
-            <br>
+            <h4>Listado De Barrios</h4>
+            <br />
             <div class="search">
               <v-text-field
-                name='dato'
+                name="dato"
                 v-model="dato"
                 :counter="20"
                 :rules="idRules"
@@ -17,10 +17,13 @@
                 outline
                 clearable
               ></v-text-field>
-              <router-link  class="text-xs-center" :to="{ name: 'busquedabarrio',
-                                                          params: {dato:this.dato} }">
+              <router-link
+                class="text-xs-center"
+                :to="{ name: 'busquedabarrio', params: { dato: this.dato } }"
+              >
                 <v-btn color="info">Buscar</v-btn>
-              </router-link>            </div>
+              </router-link>
+            </div>
 
             <v-data-table
               :headers="headers"
@@ -31,59 +34,67 @@
                 <td>{{ props.item.idbarrio }}</td>
                 <td class="text-xs-left">{{ props.item.nom_barrio }}</td>
                 <td class="text-xs-left">{{ props.item.nom_comuna }}</td>
-                <router-link  class="text-xs-center" :to="{ name: 'editbarrio',
-                                                            params: {id: props.item.idbarrio} }">
-                  editar
-                </router-link>|
-                <router-link  class="text-xs-center" :to="{ name: 'deletebarrio',
-                                                            params: {id: props.item.idbarrio} }">
+                <router-link
+                  class="text-xs-center"
+                  :to="{
+                    name: 'editbarrio',
+                    params: { id: props.item.idbarrio }
+                  }"
+                >
+                  editar </router-link
+                >|
+                <router-link
+                  class="text-xs-center"
+                  :to="{
+                    name: 'deletebarrio',
+                    params: { id: props.item.idbarrio }
+                  }"
+                >
                   Eliminar
                 </router-link>
               </template>
             </v-data-table>
-          </V-card-text>
+          </v-card-text>
         </v-card>
-      </V-flex>
+      </v-flex>
     </v-app>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      dato:"",
-      barrio:[],
+      dato: "",
+      barrio: [],
       headers: [
         {
-          text: 'Id Barrio',
-          align: 'left',
+          text: "Id Barrio",
+          align: "left",
           sortable: false,
-          value: ''
+          value: ""
         },
-        { text: 'Nombre Barrio', value: '' },
-        { text: 'Numero Comuna', value: '' },
-        {text: 'Accion', value: '' }
+        { text: "Nombre Barrio", value: "" },
+        { text: "Numero Comuna", value: "" },
+        { text: "Accion", value: "" }
       ]
     };
   },
-  created(){
+  created() {
     this.listarbarrio();
   },
-  methods:{
-    listarbarrio(){
+  methods: {
+    listarbarrio() {
       axios
         .post("http://localhost/api/api.php?action=listarbarrio")
         .then(res => {
           this.barrio = res.data.barrio;
           console.log(this.barrio);
-
         });
     }
   }
-}
+};
 </script>
-
 
 <style lang="css" scoped>
 .v-card__text {

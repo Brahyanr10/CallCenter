@@ -6,8 +6,8 @@
           <v-card-text>
             <h4>Listado Votantes</h4>
             <br>
-            <h1>{{datos}}</h1>
-            <h1>{{idbusqueda}}</h1>
+            <!-- <h1>{{datos}}</h1>
+            <h1>{{idbusqueda}}</h1> -->
             <v-data-table
               :headers="headers"
               :items="votantes"

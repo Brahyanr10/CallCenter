@@ -1,26 +1,29 @@
-<template >
-  <div >
-    <v-app >
+<template>
+  <div>
+    <v-app>
       <v-flex xs12 sm8 offset-sm2>
         <v-card>
           <v-card-text>
             <h4>Listado Puestos De Votacion</h4>
-            <br>
-
-            <v-text-field
-              name='dato'
-              v-model="dato"
-              :counter="20"
-              :rules="idRules"
-              label="dato a buscar"
-              required
-              outline
-              clearable
-            ></v-text-field>
-            <router-link  class="text-xs-center" :to="{ name: 'busquedapuesto',
-                                                        params: { dato:this.dato} }">
-              buscar
-            </router-link>
+            <br />
+            <div class="search">
+              <v-text-field
+                name="dato"
+                v-model="dato"
+                :counter="20"
+                :rules="idRules"
+                label="dato a buscar"
+                required
+                outline
+                clearable
+              ></v-text-field>
+              <router-link
+                class="text-xs-center"
+                :to="{ name: 'busquedapuesto', params: { dato: this.dato } }"
+              >
+                <v-btn color="info">Buscar</v-btn>
+              </router-link>
+            </div>
             <v-data-table
               :headers="headers"
               :items="puesto"
@@ -31,63 +34,74 @@
                 <td class="text-xs-left">{{ props.item.nombre }}</td>
                 <td class="text-xs-left">{{ props.item.direccion }}</td>
                 <td class="text-xs-left">{{ props.item.nom_barrio }}</td>
-                <router-link  class="text-xs-center" :to="{ name: 'editvotacion',
-                                                            params: {id: props.item.idpuesto_votacion} }">
-                  editar
-                </router-link>|
-                <router-link  class="text-xs-center" :to="{ name: 'deletepuesto',
-                                                            params: {id: props.item.idpuesto_votacion} }">
+                <router-link
+                  class="text-xs-center"
+                  :to="{
+                    name: 'editvotacion',
+                    params: { id: props.item.idpuesto_votacion }
+                  }"
+                >
+                  editar </router-link
+                >|
+                <router-link
+                  class="text-xs-center"
+                  :to="{
+                    name: 'deletepuesto',
+                    params: { id: props.item.idpuesto_votacion }
+                  }"
+                >
                   Eliminar
                 </router-link>
               </template>
             </v-data-table>
-          </V-card-text>
+          </v-card-text>
         </v-card>
-      </V-flex>
+      </v-flex>
     </v-app>
   </div>
-
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      dato:"",
-      puesto:[],
+      dato: "",
+      puesto: [],
       headers: [
         {
-          text: 'Id Puesto De Votacion',
-          align: 'left',
+          text: "Id Puesto De Votacion",
+          align: "left",
           sortable: false,
-          value: 'Id Puesto De Votacion'
+          value: "Id Puesto De Votacion"
         },
-        { text: 'Nombre Votacion', value: 'nombre' },
-        { text: 'Direccion', value: 'direccion' },
-        { text: 'Barrio', value: 'barrio' },
-        {text: 'Accion', value: '' }
+        { text: "Nombre Votacion", value: "nombre" },
+        { text: "Direccion", value: "direccion" },
+        { text: "Barrio", value: "barrio" },
+        { text: "Accion", value: "" }
       ]
     };
   },
-  created(){
+  created() {
     this.listarpuestos();
   },
-  methods:{
-    listarpuestos(){
+  methods: {
+    listarpuestos() {
       axios
         .post("http://localhost/api/api.php?action=listarpuestos")
         .then(res => {
           this.puesto = res.data.puesto;
           console.log(this.puesto);
-
         });
     }
   }
-}
+};
 </script>
 
 <style lang="css" scoped>
 .v-card__text {
     margin-top: 50px;
+}
+.search {
+    display: flex;
 }
 </style>

@@ -120,8 +120,8 @@ export default {
     nameRules: [
       name => !!name || "Nombre es requerido",
       name =>
-        (name && name.length <= 10) ||
-        "El nombre no puede superar los 10 caracteres"
+        (name && name.length <= 30) ||
+        "El nombre no puede superar los 30 caracteres"
     ],
     // lastnameRules: [
     //   lastname => !!lastname || "Apellido es requerido",
