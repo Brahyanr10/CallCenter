@@ -8,138 +8,129 @@
               <span class="LoginDivider-text">
                 <span>Registrar Puesto De Votacion</span>
               </span>
-              <br />
-              <br />
-              <v-text-field
-                name="planilla"
-                v-model="planilla"
-                :counter="10"
-                :rules="numPlaRules"
-                label="Numero Planilla"
-                required
-                outline
-                clearable
-              ></v-text-field>
 
-              <v-select
-                :items="lider"
-                item-text="text"
-                v-model="selecte"
-                :rules="[ldr => !!ldr || 'Tipo de persona es requerido']"
-                item-value="value"
-                label="Seleccione el tipo de persona"
-                bottom
-                autocomplete
-                outline
-                clearable
-              ></v-select>
+              <div class="inputs">
+                <v-text-field
+                  name="planilla"
+                  v-model="planilla"
+                  :counter="10"
+                  :rules="numPlaRules"
+                  label="Numero Planilla"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-text-field
-                name="nombres"
-                v-model="nombres"
-                :rules="[nam => !!nam || 'Nombre es requerido']"
-                label="Nombres"
-                required
-                outline
-                clearable
-              ></v-text-field>
+                <v-select
+                  :items="lider"
+                  item-text="text"
+                  v-model="selecte"
+                  :rules="[ldr => !!ldr || 'Tipo de persona es requerido']"
+                  item-value="value"
+                  label="Seleccione el tipo de persona"
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
 
-              <v-text-field
-                name="apellidos"
-                v-model="apellidos"
-                :rules="[apell => !!apell || 'Apellido es requerido']"
-                label="Apellidos"
-                required
-                outline
-                clearable
-              ></v-text-field>
+                <v-text-field
+                  name="nombres"
+                  v-model="nombres"
+                  :rules="[nam => !!nam || 'Nombre es requerido']"
+                  label="Nombres"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-text-field
-                name="identificacion"
-                v-model="identificacion"
-                :counter="10"
-                :rules="identificacionRules "
-                label="Numero de Identificacion"
-                required
-                outline
-                clearable
-              ></v-text-field>
+                <v-text-field
+                  name="apellidos"
+                  v-model="apellidos"
+                  :rules="[apell => !!apell || 'Apellido es requerido']"
+                  label="Apellidos"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-text-field
-                name="celular"
-                v-model="celular"
-                :rules="[tel => !!tel || 'Telefono es requerido']"
-                label="Telefono"
-                outline
-                clearable
-              ></v-text-field>
+                <v-text-field
+                  name="identificacion"
+                  v-model="identificacion"
+                  :counter="10"
+                  :rules="identificacionRules"
+                  label="Numero de Identificacion"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-text-field
-                name="direccion"
-                v-model="direccion"
-                :counter="30"
-                :rules="direccionRules"
-                label="Direccion"
-                required
-                outline
-                clearable
-              ></v-text-field>
+                <v-text-field
+                  name="celular"
+                  v-model="celular"
+                  :rules="[tel => !!tel || 'Telefono es requerido']"
+                  label="Telefono"
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-select
-                :items="barrios"
-                item-text="nom_barrio"
-                v-model="select"
-                item-value="idbarrio"
-                label="Seleccione El barrio"
-                bottom
-                autocomplete
-                outline
-                clearable
-              ></v-select>
+                <v-text-field
+                  name="direccion"
+                  v-model="direccion"
+                  :counter="30"
+                  :rules="direccionRules"
+                  label="Direccion"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <v-text-field
-                name="email"
-                v-model="email"
-                :counter="30"
-                label="E-mail"
-                required
-                outline
-                clearable
-              ></v-text-field>
+                <v-select
+                  :items="barrios"
+                  item-text="nom_barrio"
+                  v-model="select"
+                  item-value="idbarrio"
+                  label="Seleccione El barrio"
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
 
-              <v-select
-                :items="puestos"
-                item-text="nombre"
-                v-model="select"
-                item-value="idpuesto_votacion"
-                label="Seleccione el puesto de votacion"
-                bottom
-                autocomplete
-                outline
-                clearable
-              ></v-select>
+                <v-text-field
+                  name="email"
+                  v-model="email"
+                  :counter="30"
+                  label="E-mail"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-              <!-- <div class="mt-3">
-              Selected: <strong>{{ selected1 }}</strong>
-            </div>
-            <div class="mt-3">
-              Selected: <strong>{{ selected2 }}</strong>
-            </div>
-            <div class="mt-3">
-              Selected: <strong>{{ selected3 }}</strong>
-            </div> -->
+                <v-select
+                  :items="puestos"
+                  item-text="nombre"
+                  v-model="select"
+                  item-value="idpuesto_votacion"
+                  label="Seleccione el puesto de votacion"
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
 
-              <v-btn
-                color="success"
-                @click="validate"
-                class="btn-Green btn--md"
-              >
-                Registrar
-              </v-btn>
+                <v-btn
+                  color="success"
+                  @click="validate"
+                  class="btn-Green btn--md"
+                >
+                  Registrar
+                </v-btn>
 
-              <v-btn color="error" @click="reset" class="btn-Red btn--md">
-                Resetear formulario
-              </v-btn>
+                <v-btn color="error" @click="reset" class="btn-Red btn--md">
+                  Resetear formulario
+                </v-btn>
+              </div>
             </div>
           </v-form>
         </v-card-text>
@@ -184,11 +175,13 @@ export default {
     ],
     identificacionRules: [
       ident => !!ident || "Identificación es requerido",
-      ident => (ident && ident.length <= 10) || "No puede superar los 10 caracteres"
+      ident =>
+        (ident && ident.length <= 10) || "No puede superar los 10 caracteres"
     ],
     direccionRules: [
       direcc => !!direcc || "Dirección es requerido",
-      direcc => (direcc && direcc.length <= 30) || "No puede superar los 30 caracteres"
+      direcc =>
+        (direcc && direcc.length <= 30) || "No puede superar los 30 caracteres"
     ]
   }),
   created() {
@@ -280,7 +273,10 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.inputs {
+    margin-top: 40px;
+}
 .v-card__text {
     margin-top: 50px;
 }

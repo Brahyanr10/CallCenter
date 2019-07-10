@@ -5,42 +5,44 @@
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
             <div class="LoginDivider">
-            <span class="LoginDivider-text">
-              <span>Registrar Barrio</span>
-            </span>
-            <br>
-            <br>
-            <v-text-field
-              name="barrio"
-              v-model="barrio"
-              :counter="20"
-              :rules="barrioRules"
-              label="Nombre Del Barrio"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <span class="LoginDivider-text">
+                <span>Registrar Barrio</span>
+              </span>
 
-            <v-select
-              :items="comunas"
-              item-text="nom_comuna"
-              v-model="select"
-              label="Seleccione una comuna"
-              required
-              bottom
-              autocomplete
-              outline
-              clearable
-            ></v-select>
-            <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+              <div class="inputs">
+                <v-text-field
+                  name="barrio"
+                  v-model="barrio"
+                  :counter="20"
+                  :rules="barrioRules"
+                  label="Nombre Del Barrio"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-            <v-btn
-              color="success"
-              @click="validate"
-              class="btn-Green btn--md"
-            >
-              Registrar Barrio
-            </v-btn>
+                <v-select
+                  :items="comunas"
+                  item-text="nom_comuna"
+                  v-model="select"
+                  label="Seleccione una comuna"
+                  required
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
+                <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+
+                <v-btn
+                  color="success"
+                  @click="validate"
+                  class="btn-Green btn--md"
+                >
+                  Registrar Barrio
+                </v-btn>
+              </div>
+
             </div>
           </v-form>
         </v-card-text>
@@ -52,13 +54,14 @@
 <script>
 export default {
   data: () => ({
-    selected: { idcomuna:"" },
+    selected: { idcomuna: "" },
     comunas: [],
     barrio: "",
     verificacion: 0,
     barrioRules: [
       barr => !!barr || "Barrio es requerido",
-      barr => (barr && barr.length <= 20) || "No puede superar los 20 caracteres"
+      barr =>
+        (barr && barr.length <= 20) || "No puede superar los 20 caracteres"
     ]
   }),
   created() {
@@ -69,8 +72,7 @@ export default {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
         this.agregarbarrio();
-      }
-      else{
+      } else {
       }
     },
     agregarbarrio() {
@@ -102,29 +104,30 @@ export default {
                 console.log(this.selected);
                 this.reset();
                 Swal.fire({
-                  position: 'top',
-                  type: 'success',
-                  title: 'Comuna registrada con exito',
+                  position: "top",
+                  type: "success",
+                  title: "Comuna registrada con exito",
                   showConfirmButton: false,
                   timer: 1500
-                })
+                });
               });
-          }else {
+          } else {
             Swal.fire({
-              type: 'error',
-              title: 'Error...',
-              text: 'La comuna ya esta registrada',
-
-              })
+              type: "error",
+              title: "Error...",
+              text: "La comuna ya esta registrada"
+            });
           }
         });
     },
     traercomunas() {
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=comunas")
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=comunas"
+        )
         .then(res => {
           this.comunas = res.data.comuna;
-          this.selected=this.comunas[0].idcomuna
+          this.selected = this.comunas[0].idcomuna;
           console.log(this.comunas);
         });
     }
@@ -132,7 +135,10 @@ export default {
 };
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.inputs {
+    margin-top: 40px;
+}
 .v-card__text {
     margin-top: 50px;
 }

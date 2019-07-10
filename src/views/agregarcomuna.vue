@@ -1,73 +1,64 @@
-<template >
+<template>
   <v-layout>
     <v-flex xs12 sm4 offset-sm4>
       <v-card>
         <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation >
+          <v-form ref="form" v-model="valid" lazy-validation>
             <div class="LoginDivider">
-            <span class="LoginDivider-text">
-              <span>Registrar Comuna</span>
-            </span>
-            <br>
-            <br>
+              <span class="LoginDivider-text">
+                <span>Registrar Comuna</span>
+              </span>
 
-            <v-text-field
-              name='comuna'
-              v-model="comuna"
-              :counter="10"
-              :rules="idRules"
-              label="Numero Comuna"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <div class="inputs">
+                <v-text-field
+                  name="comuna"
+                  v-model="comuna"
+                  :counter="10"
+                  :rules="idRules"
+                  label="Numero Comuna"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-            <v-btn
-              color="success"
-              @click="validate"
-              class="btn-Green btn--md"
-            >
-              Registrar Comuna
-            </v-btn>
-
+                <v-btn
+                  color="success"
+                  @click="validate"
+                  class="btn-Green btn--md"
+                >
+                  Registrar Comuna
+                </v-btn>
+              </div>
             </div>
-            <!-- <v-btn color="error" @click="reset">
-              Reset Form
-            </v-btn> -->
           </v-form>
         </v-card-text>
       </v-card>
     </v-flex>
   </v-layout>
-
 </template>
 
 <script>
 export default {
-    data: () => ({
-      comunas:[],
-      verificacion:0,
-      idRules: [
-        id => !!id || "Numero de Comuna es requerido",
-        id =>
-          (id && id.length <= 10) ||
-          "no puede superar los 10 caracteres"
-      ],
-    }),
+  data: () => ({
+    comunas: [],
+    verificacion: 0,
+    idRules: [
+      id => !!id || "Numero de Comuna es requerido",
+      id => (id && id.length <= 10) || "no puede superar los 10 caracteres"
+    ]
+  }),
 
-
-methods:{
-  validate() {
-    if (this.$refs.form.validate()) {
-      this.agregarcomuna();
-    }
-    else{
-    }
-  },
-  reset() {
-    this.$refs.form.reset();
-  },
-    agregarcomuna(){
+  methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.agregarcomuna();
+      } else {
+      }
+    },
+    reset() {
+      this.$refs.form.reset();
+    },
+    agregarcomuna() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -77,41 +68,47 @@ methods:{
       let params = new FormData();
       params.append("comuna", this.comuna);
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=buscarcomuna", params, config)
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarcomuna",
+          params,
+          config
+        )
         .then(res => {
-          this.comunas=res.data.comuna;
+          this.comunas = res.data.comuna;
           if (this.comunas.length == 0) {
-          axios
-            .post("https://pruebas1994.000webhostapp.com/api/api.php?action=agregarcomuna", params, config)
-            .then(res => {
-              this.reset();
-              Swal.fire({
-                position: 'top',
-                type: 'success',
-                title: 'Comuna registrada con exito',
-                showConfirmButton: false,
-                timer: 1500
-              })
-
-            });
-          }else {
+            axios
+              .post(
+                "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarcomuna",
+                params,
+                config
+              )
+              .then(res => {
+                this.reset();
+                Swal.fire({
+                  position: "top",
+                  type: "success",
+                  title: "Comuna registrada con exito",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              });
+          } else {
             Swal.fire({
-              type: 'error',
-              title: 'Error...',
-              text: 'La comuna ya esta registrada',
-
-              })
+              type: "error",
+              title: "Error...",
+              text: "La comuna ya esta registrada"
+            });
           }
         });
-
-
     }
-}
-
-}
+  }
+};
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.inputs {
+    margin-top: 40px;
+}
 .v-card__text {
     margin-top: 50px;
 }

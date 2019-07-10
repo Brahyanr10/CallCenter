@@ -1,62 +1,58 @@
-<template >
+<template>
   <v-layout>
     <v-flex xs12 sm4 offset-sm4>
       <v-card>
         <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation >
+          <v-form ref="form" v-model="valid" lazy-validation>
             <div class="LoginDivider">
-            <span class="LoginDivider-text">
-              <span>Registrar Puesto De Votacion</span>
-            </span>
-            <br>
-            <br>
+              <span class="LoginDivider-text">
+                <span>Registrar Puesto De Votacion</span>
+              </span>
 
-            <v-text-field
-              name='punto_votacion'
-              v-model="punto_votacion"
-              :counter="60"
-              :rules="puntoVRules"
-              label="Punto de Votacion"
-              required
-              outline
-              clearable
-            ></v-text-field>
+              <div class="inputs">
+                <v-text-field
+                  name="punto_votacion"
+                  v-model="punto_votacion"
+                  :counter="60"
+                  :rules="puntoVRules"
+                  label="Punto de Votación"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-            <v-text-field
-              name='direccion'
-              v-model="direccion"
-              :counter="60"
-              :rules="direccionRules"
-              label="Direccion"
-              required
-              outline
-              clearable
-            ></v-text-field>
+                <v-text-field
+                  name="direccion"
+                  v-model="direccion"
+                  :counter="60"
+                  :rules="direccionRules"
+                  label="Dirección"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
 
-            <v-select
-              :items="barrios"
-              item-text="nom_barrio"
-              v-model="select"
-              item-value="idbarrio"
-              label="Seleccione El barrio"
-              bottom
-              autocomplete
-              outline
-              clearable
-            ></v-select>
+                <v-select
+                  :items="barrios"
+                  item-text="nom_barrio"
+                  v-model="select"
+                  item-value="idbarrio"
+                  label="Seleccione El barrio"
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
 
-
-            <v-btn
-              color="success"
-              @click="validate"
-              class="btn-Green btn--md"
-            >
-              Registrar Puesto De Votacion
-            </v-btn>
-          </div>
-            <!-- <v-btn color="error" @click="reset">
-              Reset Form
-            </v-btn> -->
+                <v-btn
+                  color="success"
+                  @click="validate"
+                  class="btn-Green btn--md"
+                >
+                  Registrar Puesto De Votacion
+                </v-btn>
+              </div>
+            </div>
           </v-form>
         </v-card-text>
       </v-card>
@@ -66,33 +62,36 @@
 
 <script>
 export default {
-
   data: () => ({
     selected: { idbarrio: "" },
     barrios: [],
-    puesto:[],
-    punto_votacion:"",
-    direccion:"",
+    puesto: [],
+    punto_votacion: "",
+    direccion: "",
     puntoVRules: [
       puntV => !!puntV || "Puesto de votación es requerido",
-      puntV => (puntV && puntV.length <= 60) || "No puede superar los 60 caracteres"
+      puntV =>
+        (puntV && puntV.length <= 60) || "No puede superar los 60 caracteres"
     ],
     direccionRules: [
       direcc => !!direcc || "Dirección es requerido",
-      direcc => (direcc && direcc.length <= 60) || "No puede superar los 60 caracteres"
+      direcc =>
+        (direcc && direcc.length <= 60) || "No puede superar los 60 caracteres"
     ]
   }),
-  created(){
+  created() {
     this.traerbarrios();
   },
 
-  methods:{
+  methods: {
     traerbarrios() {
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=barrios")
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=barrios"
+        )
         .then(res => {
           this.barrios = res.data.barrio;
-          this.selected=this.barrios[0].idbarrio
+          this.selected = this.barrios[0].idbarrio;
           console.log(this.barrios);
         });
     },
@@ -100,11 +99,10 @@ export default {
       if (this.$refs.form.validate()) {
         // this.snackbar = true;
         this.agregarpunto();
-      }
-      else{
+      } else {
       }
     },
-    agregarpunto(){
+    agregarpunto() {
       let config = {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
@@ -124,40 +122,42 @@ export default {
         .then(res => {
           this.puesto = res.data.puesto;
           if (this.puesto.length == 0) {
-          axios
-            .post(
-              "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarpunto",
-              params,
-              config
-            )
-            .then(res => {
-              this.reset();
-              Swal.fire({
-                position: 'top',
-                type: 'success',
-                title: 'Puesto de votacion registrada con exito',
-                showConfirmButton: false,
-                timer: 1500
-              })
-            })
-          }else {
+            axios
+              .post(
+                "https://pruebas1994.000webhostapp.com/api/api.php?action=agregarpunto",
+                params,
+                config
+              )
+              .then(res => {
+                this.reset();
+                Swal.fire({
+                  position: "top",
+                  type: "success",
+                  title: "Puesto de votacion registrada con exito",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+              });
+          } else {
             Swal.fire({
-              type: 'error',
-              title: 'Error...',
-              text: 'Puesto ya esta registrada',
-
-              })
+              type: "error",
+              title: "Error...",
+              text: "Puesto ya esta registrada"
+            });
           }
         });
     },
     reset() {
       this.$refs.form.reset();
-    },
+    }
   }
-}
+};
 </script>
 
-<style lang="css" scoped>
+<style scoped>
+.inputs {
+    margin-top: 40px;
+}
 .v-card__text {
     margin-top: 50px;
 }
