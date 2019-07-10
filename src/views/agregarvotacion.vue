@@ -14,7 +14,7 @@
             <v-text-field
               name='punto_votacion'
               v-model="punto_votacion"
-              :counter="20"
+              :counter="60"
               :rules="idRules"
               label="Punto de Votacion"
               required
@@ -25,7 +25,7 @@
             <v-text-field
               name='direccion'
               v-model="direccion"
-              :counter="20"
+              :counter="60"
               :rules="idRules"
               label="Direccion"
               required
