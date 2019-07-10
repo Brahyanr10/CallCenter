@@ -24,7 +24,7 @@
                 <v-select
                   :items="lider"
                   item-text="text"
-                  v-model="selecte"
+                  v-model="selected3"
                   :rules="[ldr => !!ldr || 'Tipo de persona es requerido']"
                   item-value="value"
                   label="Seleccione el tipo de persona"
@@ -88,7 +88,7 @@
                 <v-select
                   :items="barrios"
                   item-text="nom_barrio"
-                  v-model="select"
+                  v-model="selected1"
                   item-value="idbarrio"
                   label="Seleccione El barrio"
                   bottom
@@ -110,7 +110,7 @@
                 <v-select
                   :items="puestos"
                   item-text="nombre"
-                  v-model="select"
+                  v-model="selected2"
                   item-value="idpuesto_votacion"
                   label="Seleccione el puesto de votacion"
                   bottom

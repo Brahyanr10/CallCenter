@@ -35,7 +35,7 @@
                 <v-select
                   :items="barrios"
                   item-text="nom_barrio"
-                  v-model="select"
+                  v-model="selected"
                   item-value="idbarrio"
                   label="Seleccione El barrio"
                   bottom
@@ -112,7 +112,7 @@ export default {
       let params = new FormData();
       params.append("punto", this.punto_votacion);
       params.append("direccion", this.direccion);
-      params.append("idbarrio", this.selected[0]);
+      params.append("idbarrio", this.selected);
       axios
         .post(
           "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarpuesto",

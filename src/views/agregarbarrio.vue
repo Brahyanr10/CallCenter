@@ -24,7 +24,8 @@
                 <v-select
                   :items="comunas"
                   item-text="nom_comuna"
-                  v-model="select"
+                  v-model="selected"
+                  item-value="idcomuna"
                   label="Seleccione una comuna"
                   required
                   bottom
@@ -101,15 +102,14 @@ export default {
                 config
               )
               .then(res => {
-                console.log(this.selected);
-                this.reset();
                 Swal.fire({
                   position: "top",
                   type: "success",
-                  title: "Comuna registrada con exito",
+                  title: "Barrio registrada con exito",
                   showConfirmButton: false,
                   timer: 1500
                 });
+                this.reset();
               });
           } else {
             Swal.fire({
