@@ -7,22 +7,27 @@
             <h4>Listado De Barrios</h4>
             <br />
             <div class="search">
-              <v-text-field
-                name="dato"
-                v-model="dato"
-                :counter="20"
-                :rules="idRules"
-                label="Barrio a buscar"
-                required
-                outline
-                clearable
-              ></v-text-field>
-              <router-link
-                class="text-xs-center"
-                :to="{ name: 'busquedabarrio', params: { dato: this.dato } }"
-              >
-                <v-btn color="info">Buscar</v-btn>
-              </router-link>
+              <div class="infor">
+                <v-text-field
+                  name="dato"
+                  v-model="dato"
+                  :counter="20"
+                  :rules="idRules"
+                  label="Barrio a buscar"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
+                <router-link
+                  class="text-xs-center"
+                  :to="{ name: 'busquedabarrio', params: { dato: this.dato } }"
+                >
+                  <v-btn color="info" @click="validate">
+                    Buscar
+                    <v-icon>search</v-icon>
+                  </v-btn>
+                </router-link>
+              </div>
             </div>
 
             <v-data-table
@@ -41,8 +46,16 @@
                     params: { id: props.item.idbarrio }
                   }"
                 >
-                  editar </router-link
-                >|
+                  <v-tooltip left>
+                    <template v-slot:activator="{ on }">
+                      <v-btn dark v-on="on" color="cyan" fab small dark>
+                        <v-icon>edit</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Editar</span>
+                  </v-tooltip>
+                </router-link>
+                |
                 <router-link
                   class="text-xs-center"
                   :to="{
@@ -50,7 +63,14 @@
                     params: { id: props.item.idbarrio }
                   }"
                 >
-                  Eliminar
+                  <v-tooltip right>
+                    <template v-slot:activator="{ on }">
+                      <v-btn dark v-on="on" color="warning" fab small dark>
+                        <v-icon>delete</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Eliminar</span>
+                  </v-tooltip>
                 </router-link>
               </template>
             </v-data-table>
@@ -75,8 +95,8 @@ export default {
           value: ""
         },
         { text: "Nombre Barrio", value: "" },
-        { text: "Numero Comuna", value: "" },
-        { text: "Accion", value: "" }
+        { text: "Número Comuna", value: "" },
+        { text: "Acción", value: "" }
       ]
     };
   },
@@ -86,7 +106,9 @@ export default {
   methods: {
     listarbarrio() {
       axios
-        .post("https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio")
+        .post(
+          "https://pruebas1994.000webhostapp.com/api/api.php?action=listarbarrio"
+        )
         .then(res => {
           this.barrio = res.data.barrio;
           console.log(this.barrio);
@@ -102,5 +124,12 @@ export default {
 }
 .search {
     display: flex;
+}
+.infor {
+    display: flex;
+    width: 60%;
+}
+.info .v-icon {
+    margin-left: 10px;
 }
 </style>
