@@ -21,13 +21,27 @@
                   clearable
                 ></v-text-field>
 
-                <v-select
+                 <v-select
                   :items="lider"
                   item-text="text"
                   v-model="selected3"
                   :rules="[ldr => !!ldr || 'Tipo de persona es requerido']"
                   item-value="value"
                   label="Seleccione el tipo de persona"
+                  @change="mostrar()"
+                  bottom
+                  autocomplete
+                  outline
+                  clearable
+                ></v-select>
+
+
+                <v-select
+                  :items="votantes"
+                  item-text="iddatos"
+                  v-model="selected4"
+                  item-value="iddatos"
+                  label="Codigo de Lider o Coordinador "
                   bottom
                   autocomplete
                   outline
@@ -80,7 +94,7 @@
                   :counter="30"
                   :rules="direccionRules"
                   label="Direccion"
-                  required
+
                   outline
                   clearable
                 ></v-text-field>
@@ -91,6 +105,7 @@
                   v-model="selected1"
                   item-value="idbarrio"
                   label="Seleccione El barrio"
+                  required
                   bottom
                   autocomplete
                   outline
@@ -119,6 +134,23 @@
                   clearable
                 ></v-select>
 
+                <v-text-field
+                  name="mesa"
+                  v-model="mesa"
+                  :counter="10"
+                  label="Mesa de votacion"
+                  required
+                  outline
+                  clearable
+                ></v-text-field>
+
+                <v-textarea
+                outline
+                name="observacion"
+                v-model="observacion"
+                label="Observacion"
+                ></v-textarea>
+
                 <v-btn
                   color="success"
                   @click="validate"
@@ -145,7 +177,9 @@ export default {
     selected1: { idbarrio: "" },
     selected2: { idpuesto_votacion: "" },
     selected3: { value: "" },
+    selected4: {iddatos: ""},
     planilla: "",
+    mostrar: false,
     lider_referido: "",
     nombres: "",
     apellidos: "",
@@ -154,12 +188,16 @@ export default {
     direccion: "",
     barrios: [],
     email: "",
+    mesa:"",
+    observacion:"",
     puesto: [],
     votante: [],
+    votantes:[],
+
     lider: [
       { value: "", text: "" },
-      { value: "Lider", text: "Lider" },
       { value: "Referido", text: "Referido" },
+      { value: "Lider", text: "Lider" },
       { value: "Coordinador", text: "Coordinador" },
       { value: "Otro", text: "Otro" }
     ],
@@ -178,11 +216,11 @@ export default {
       ident =>
         (ident && ident.length <= 10) || "No puede superar los 10 caracteres"
     ],
-    direccionRules: [
-      direcc => !!direcc || "Dirección es requerido",
-      direcc =>
-        (direcc && direcc.length <= 30) || "No puede superar los 30 caracteres"
-    ]
+    // direccionRules: [
+    //   direcc => !!direcc || "Dirección es requerido",
+    //   direcc =>
+    //     (direcc && direcc.length <= 30) || "No puede superar los 30 caracteres"
+    // ]
   }),
   created() {
     this.traerdatos();
@@ -194,6 +232,14 @@ export default {
         this.agregarvotante();
       } else {
       }
+    },
+    mostrar(){
+      console.log("entro");
+      // if (this.selected3 == 'Lider' || this.selected3 == 'Coordinador' ) {
+        this.mostrar=true;
+
+      // }
+
     },
     traerdatos() {
       axios
@@ -213,6 +259,15 @@ export default {
           this.selected2 = this.puestos[0].idpuesto_votacion;
           this.selected3 = this.lider[0].value;
         });
+
+        axios
+          .post(
+            "https://pruebas1994.000webhostapp.com/api/api.php?action=listarvotantes"
+          )
+          .then(res => {
+            this.votantes = res.data.votantes;
+            this.selected4=this.votantes[0].iddatos;
+          });
     },
     agregarvotante() {
       let config = {
@@ -232,6 +287,9 @@ export default {
       params.append("idbarrio", this.selected1);
       params.append("email", this.email);
       params.append("idpuesto", this.selected2);
+      params.append("mesa", this.mesa);
+      params.append("iddatos", this.selected4);
+      params.append("observacion", this.observacion);
       axios
         .post(
           "https://pruebas1994.000webhostapp.com/api/api.php?action=buscarvotante",
@@ -256,6 +314,7 @@ export default {
                   timer: 1500
                 });
                 this.reset();
+
               });
           } else {
             Swal.fire({
@@ -268,6 +327,7 @@ export default {
     },
     reset() {
       this.$refs.form.reset();
+      // location.reload();
     }
   }
 };

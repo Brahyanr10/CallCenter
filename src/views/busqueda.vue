@@ -14,6 +14,7 @@
               class="elevation-1"
             >
               <template v-slot:items="props">
+                <td>{{ props.item.iddatos }}</td>
                 <td>{{ props.item.num_planilla }}</td>
                 <td class="text-xs-left">{{ props.item.lider_referido }}</td>
                 <td class="text-xs-left">{{ props.item.nombres }}</td>
@@ -22,8 +23,12 @@
                 <td class="text-xs-left">{{ props.item.celular }}</td>
                 <td class="text-xs-left">{{ props.item.direccion }}</td>
                 <td class="text-xs-left">{{ props.item.nom_barrio }}</td>
+                <td class="text-xs-left">{{ props.item.nom_comuna }}</td>
                 <td class="text-xs-left">{{ props.item.email }}</td>
                 <td class="text-xs-left">{{ props.item.nombre }}</td>
+                <td class="text-xs-left">{{ props.item.mesa }}</td>
+                <td class="text-xs-left">{{ props.item.codigo_coor_lider }}</td>
+                <td class="text-xs-left">{{ props.item.observacion }}</td>
 
                 <router-link  class="text-xs-center" :to="{ name: 'editvotantes',
                                                             params: {id: props.item.iddatos} }">
@@ -52,21 +57,31 @@ export default {
       votantes:[],
       headers: [
         {
-          text: '# Planilla',
-          align: 'left',
+          text: "Codigo",
+          align: "left",
           sortable: false,
-          value: ''
+          value: ""
         },
-        { text: 'Lider o referido', value: '' },
-        { text: 'Nombres', value: '' },
-        { text: 'Apellidos', value: '' },
-        { text: 'Identificacion', value: '' },
-        { text: 'Celular', value: '' },
-        { text: 'Direccion', value: '' },
-        { text: 'Barrio', value: '' },
-        { text: 'E-mail', value: '' },
-        { text: 'Puesto De Votacion', value: '' },
-        {text: 'Accion', value: '' }
+        {
+          text: "Planilla",
+          align: "left",
+          sortable: false,
+          value: ""
+        },
+        { text: "Líder o referido", value: "" },
+        { text: "Nombres", value: "" },
+        { text: "Apellidos", value: "" },
+        { text: "Identificación", value: "" },
+        { text: "Celular", value: "" },
+        { text: "Dirección", value: "" },
+        { text: "Barrio", value: "" },
+        { text: "Comuna", value: "" },
+        { text: "E-mail", value: "" },
+        { text: "Puesto De Votación", value: "" },
+        { text: "Mesa De Votación", value: "" },
+        { text: "Codigo lider O Coordinador", value: "" },
+        { text: "Observacion", value: "" },
+        { text: "Acción", value: "" }
       ]
     }
   },
